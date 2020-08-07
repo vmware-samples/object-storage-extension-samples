@@ -2,8 +2,10 @@
 # object-storage-extension-samples
 
 ## Overview
-VMware Cloud Director Object Storage Extension (OSE) is a midware which provides the capability of consuming object storage services for Cloud Director users.
+[VMware Cloud Director Object Storage Extension](https://docs.vmware.com/en/VMware-Cloud-Director-Object-Storage-Extension/index.html) (OSE) is a midware which provides the capability of consuming object storage services for Cloud Director users.
+
 Since version 2.0, OSE opens extensibility framework for vendor and community to integrate third-party object storage platforms. 
+
 This project includes sample implentation of extensively integrated object storage platforms for OSE, but not limited to these.
 
 ## Samples
