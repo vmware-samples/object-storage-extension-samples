@@ -1,0 +1,6 @@
+rootProject.name = 'osis.ceph'
+include 'osis-app'
+include 'osis-core'
+include 'ceph-admin-client'
+
+

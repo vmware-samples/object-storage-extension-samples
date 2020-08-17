@@ -1,0 +1,6 @@
+dependencies {
+    compile project(':ceph-admin-client')
+}
+test {
+    useJUnitPlatform()
+}

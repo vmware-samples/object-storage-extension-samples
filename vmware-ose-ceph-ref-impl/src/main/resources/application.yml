@@ -1,0 +1,36 @@
+osis:
+  ceph:
+    name:
+    region:
+    storage-classes:
+    version:
+    rgw:
+      endpoint:
+      access-key:
+      secret-key:
+    s3:
+      endpoint:
+      access-key:
+      secret-key:
+    console:
+      endpoint:
+  api:
+    version:
+
+server:
+  port:
+  verbose:
+  ssl:
+    key-store:
+    key-store-password:
+    key-store-type:
+    key-alias:
+
+security:
+  require-ssl:
+  jwt:
+    enabled:
+    access-token-expiration-time:
+    refresh_token_expiration_time:
+    token-issuer:
+    token-signing-key:
