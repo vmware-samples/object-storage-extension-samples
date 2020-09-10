@@ -389,15 +389,6 @@ def new_passdown_variables(actual_response, global_variables=None,
 if __name__ == '__main__':
     conf = dict
 
-    # boto3_client = S3CompatibleAPI(
-    #     endpoint_url='https://10.110.124.125:443/api/v1/s3',
-    #     aws_access_key_id='AKIAW6YG7WGKATSLD6PH',
-    #     aws_secret_access_key='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',
-    #     region_name='us-east-1'
-    # )
-    #
-    # test_bucket_prefix = 's3testauto'
-
     remove_test_buckets(conf)
 
     pass
