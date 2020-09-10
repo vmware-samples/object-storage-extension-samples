@@ -1,0 +1,17 @@
+# User can define the value for parameter in user_definition, '|' is used to split multiple values
+# The parameter in keep_param is the required parameter you want to keep
+user_definition:
+  Key: test-obj-1
+  Accept: application/xml | application/json
+  Grant: id=XXXXXXXXX
+  Body: test1 | test2
+  SSECustomerAlgorithm: ASE256
+  MaxKeys: 1 | -1 | 1000
+  Delimiter: /
+  Prefix: f1/ | f1/f2/ | f1/f2/f3/
+
+keep_param:
+  Delimiter: /
+  MaxKeys: 555
+  Prefix: aaa
+

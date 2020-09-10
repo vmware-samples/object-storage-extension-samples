@@ -1,0 +1,80 @@
+TCID,CaseTitle,Catalog,Priority,Variables,PreCondition,Role,ClientType,AuthSettings,Action,Parameter,ExpectResponseCode,ExpectResponseHeader,ExpectResponseBody,ExpectResponseBodySchema,PostValidation,Cleanup,Description,Comments
+TestObject#test_curd_object#2,TU1 put a new object to own bucket,ObjectCRUD,P0,"{""bucket_name"":""vcd0.org1.tu1.s3.cmp.put-object.%s"" % timestamp(format=""%Y%m%d%H%M%S%f"")[:-3], ""object_name"":""vcd0.org1.tu1.s3.cmp.%s.txt"" % timestamp(format=""%Y-%m-%dt%H-%M-%S.%fz""), ""etag"":'""%s""' % calculate_md5(""test""), ""last_modified_range"":datetimerange.DateTimeRange(datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(seconds=300),datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(seconds=300))}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,put_object,"{""Bucket"":self.variables[""bucket_name""], ""Key"":self.variables[""object_name""], ""Body"":""test"",""ContentType"":""text/plain""}",200,"{""etag"":self.variables['etag']}","{""ETag"":self.variables['etag']}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""delete_object"", {""Bucket"":self.variables[""bucket_name""],""Key"":self.variables[""object_name""]}, [204, 404]),
+(""group1:user1"", ""S3CompatibleAPI"", ""delete_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [204, 404])]","TU1 put a new object to own bucket
+Precondition:
+1.TU1 create a bucket
+Action:
+1.TU1 put an object to own bucket
+Clean up:
+1.TU1 delete the object
+2.TU1 delete the bucket",
+TestObject#test_curd_object#3,TU1 put a new object to own bucket with ACL,ObjectCRUD,P0,"{""bucket_name"":""vcd0.org1.tu1.s3.cmp.put-object.%s"" % timestamp(format=""%Y%m%d%H%M%S%f"")[:-3], ""object_name"":""vcd0.org1.tu1.s3.cmp.%s.txt"" % timestamp(format=""%Y-%m-%dt%H-%M-%S.%fz""), ""etag"":'""%s""' % calculate_md5(""test""), ""last_modified_range"":datetimerange.DateTimeRange(datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(seconds=300),datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(seconds=300))}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,put_object,"{""Bucket"":self.variables[""bucket_name""], ""Key"":self.variables[""object_name""], ""Body"":""test"",""ACL"":""public-read"",""ContentType"":""text/plain""}",200,"{""etag"":self.variables['etag']}","{""ETag"":self.variables['etag']}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""delete_object"", {""Bucket"":self.variables[""bucket_name""],""Key"":self.variables[""object_name""]}, [204, 404]),
+(""group1:user1"", ""S3CompatibleAPI"", ""delete_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [204, 404])]","TU1 put a new object to own bucket
+Precondition:
+1.TU1 create a bucket
+Action:
+1.TU1 put an object to own bucket
+Clean up:
+1.TU1 delete the object
+2.TU1 delete the bucket",
+TestObject#test_curd_object#4,TU1 put a new object to own bucket with ACL,ObjectCRUD,P0,"{""bucket_name"":""vcd0.org1.tu1.s3.cmp.put-object.%s"" % timestamp(format=""%Y%m%d%H%M%S%f"")[:-3], ""object_name"":""vcd0.org1.tu1.s3.cmp.%s.txt"" % timestamp(format=""%Y-%m-%dt%H-%M-%S.%fz""), ""etag"":'""%s""' % calculate_md5(""test""), ""last_modified_range"":datetimerange.DateTimeRange(datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(seconds=300),datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(seconds=300))}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,put_object,"{""Bucket"":self.variables[""bucket_name""], ""Key"":self.variables[""object_name""], ""Body"":""test"",""ACL"":""public-read-write"",""ContentType"":""text/plain""}",200,"{""etag"":self.variables['etag']}","{""ETag"":self.variables['etag']}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""delete_object"", {""Bucket"":self.variables[""bucket_name""],""Key"":self.variables[""object_name""]}, [204, 404]),
+(""group1:user1"", ""S3CompatibleAPI"", ""delete_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [204, 404])]","TU1 put a new object to own bucket
+Precondition:
+1.TU1 create a bucket
+Action:
+1.TU1 put an object to own bucket
+Clean up:
+1.TU1 delete the object
+2.TU1 delete the bucket",
+TestObject#test_curd_object#5,TU1 put a new object to own bucket with ACL,ObjectCRUD,P0,"{""bucket_name"":""vcd0.org1.tu1.s3.cmp.put-object.%s"" % timestamp(format=""%Y%m%d%H%M%S%f"")[:-3], ""object_name"":""vcd0.org1.tu1.s3.cmp.%s.txt"" % timestamp(format=""%Y-%m-%dt%H-%M-%S.%fz""), ""etag"":'""%s""' % calculate_md5(""test""), ""last_modified_range"":datetimerange.DateTimeRange(datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(seconds=300),datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(seconds=300))}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,put_object,"{""Bucket"":self.variables[""bucket_name""], ""Key"":self.variables[""object_name""], ""Body"":""test"",""ACL"":""bucket-owner-read"",""ContentType"":""text/plain""}",200,"{""etag"":self.variables['etag']}","{""ETag"":self.variables['etag']}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""delete_object"", {""Bucket"":self.variables[""bucket_name""],""Key"":self.variables[""object_name""]}, [204, 404]),
+(""group1:user1"", ""S3CompatibleAPI"", ""delete_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [204, 404])]","TU1 put a new object to own bucket
+Precondition:
+1.TU1 create a bucket
+Action:
+1.TU1 put an object to own bucket
+Clean up:
+1.TU1 delete the object
+2.TU1 delete the bucket",
+TestObject#test_curd_object#6,TU1 put a new object to own bucket with ACL,ObjectCRUD,P0,"{""bucket_name"":""vcd0.org1.tu1.s3.cmp.put-object.%s"" % timestamp(format=""%Y%m%d%H%M%S%f"")[:-3], ""object_name"":""vcd0.org1.tu1.s3.cmp.%s.txt"" % timestamp(format=""%Y-%m-%dt%H-%M-%S.%fz""), ""etag"":'""%s""' % calculate_md5(""test""), ""last_modified_range"":datetimerange.DateTimeRange(datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(seconds=300),datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(seconds=300))}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,put_object,"{""Bucket"":self.variables[""bucket_name""], ""Key"":self.variables[""object_name""], ""Body"":""test"",""ACL"":""bucket-owner-full-control"",""ContentType"":""text/plain""}",200,"{""etag"":self.variables['etag']}","{""ETag"":self.variables['etag']}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""delete_object"", {""Bucket"":self.variables[""bucket_name""],""Key"":self.variables[""object_name""]}, [204, 404]),
+(""group1:user1"", ""S3CompatibleAPI"", ""delete_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [204, 404])]","TU1 put a new object to own bucket
+Precondition:
+1.TU1 create a bucket
+Action:
+1.TU1 put an object to own bucket
+Clean up:
+1.TU1 delete the object
+2.TU1 delete the bucket",
+TestObject#test_curd_object#7,TU1 put a new object to own bucket with meta,ObjectCRUD,P0,"{""bucket_name"":""vcd0.org1.tu1.s3.cmp.put-object.%s"" % timestamp(format=""%Y%m%d%H%M%S%f"")[:-3], ""object_name"":""vcd0.org1.tu1.s3.cmp.%s.txt"" % timestamp(format=""%Y-%m-%dt%H-%M-%S.%fz""), ""etag"":'""%s""' % calculate_md5(""test""), ""last_modified_range"":datetimerange.DateTimeRange(datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(seconds=300),datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(seconds=300))}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,put_object,"{""Bucket"":self.variables[""bucket_name""], ""Key"":self.variables[""object_name""], ""Body"":""test"",""Metadata"":{""key"":""value""},""ContentType"":""text/plain""}",200,"{""etag"":self.variables['etag']}","{""ETag"":self.variables['etag']}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""delete_object"", {""Bucket"":self.variables[""bucket_name""],""Key"":self.variables[""object_name""]}, [204, 404]),
+(""group1:user1"", ""S3CompatibleAPI"", ""delete_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [204, 404])]","TU1 put a new object to own bucket
+Precondition:
+1.TU1 create a bucket
+Action:
+1.TU1 put an object to own bucket
+Clean up:
+1.TU1 delete the object
+2.TU1 delete the bucket",
+TestObject#test_curd_object#8,TU1 put a new object to own bucket with tag,ObjectCRUD,P0,"{""bucket_name"":""vcd0.org1.tu1.s3.cmp.put-object.%s"" % timestamp(format=""%Y%m%d%H%M%S%f"")[:-3], ""object_name"":""vcd0.org1.tu1.s3.cmp.%s.txt"" % timestamp(format=""%Y-%m-%dt%H-%M-%S.%fz""), ""etag"":'""%s""' % calculate_md5(""test""), ""last_modified_range"":datetimerange.DateTimeRange(datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(seconds=300),datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(seconds=300))}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,put_object,"{""Bucket"":self.variables[""bucket_name""], ""Key"":self.variables[""object_name""], ""Body"":""test"",""Tagging"":""key=value"",""ContentType"":""text/plain""}",200,"{""etag"":self.variables['etag']}","{""ETag"":self.variables['etag']}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""delete_object"", {""Bucket"":self.variables[""bucket_name""],""Key"":self.variables[""object_name""]}, [204, 404]),
+(""group1:user1"", ""S3CompatibleAPI"", ""delete_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [204, 404])]","TU1 put a new object to own bucket
+Precondition:
+1.TU1 create a bucket
+Action:
+1.TU1 put an object to own bucket
+Clean up:
+1.TU1 delete the object
+2.TU1 delete the bucket",
+TestObject#test_curd_object#9,TU1 put delete own object under own bucket,ObjectCRUD,P0,"{""bucket_name"":""vcd0.org1.tu1.s3.cmp.put-object.%s"" % timestamp(format=""%Y%m%d%H%M%S%f"")[:-3], ""object_name"":""vcd0.org1.tu1.s3.cmp.%s.txt"" % timestamp(format=""%Y-%m-%dt%H-%M-%S.%fz""), ""etag"":'""%s""' % calculate_md5(""test""), ""last_modified_range"":datetimerange.DateTimeRange(datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(seconds=300),datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(seconds=300))}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""put_object"",{""Bucket"":self.variables[""bucket_name""], ""Key"":self.variables[""object_name""], ""Body"":""test"",""ContentType"":""text/plain""}, [200, 409])]",group1:user1,S3CompatibleAPI,,delete_object,"{""Bucket"":self.variables[""bucket_name""],""Key"":self.variables[""object_name""]}",204,,,,,"[(""group1:user1"", ""S3CompatibleAPI"", ""delete_object"", {""Bucket"":self.variables[""bucket_name""],""Key"":self.variables[""object_name""]}, [204, 404]),
+(""group1:user1"", ""S3CompatibleAPI"", ""delete_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [204, 404])]","TU1 put delete own object under own bucket
+Precondition:
+1.TU1 create a bucket
+2.TU1 put an object to own bucket
+Action:
+1.TU1 delete the object
+Clean up:
+1.TU1 delete the bucket",
+TestObject#test_curd_object#10,TU1 head object,ObjectCRUD,P0,"{""bucket_name"":""vcd0.org1.tu1.s3.cmp.put-object.%s"" % timestamp(format=""%Y%m%d%H%M%S%f"")[:-3], ""object_name"":""vcd0.org1.tu1.s3.cmp.%s.txt"" % timestamp(format=""%Y-%m-%dt%H-%M-%S.%fz""), ""etag"":'""%s""' % calculate_md5(""test""), ""last_modified_range"":datetimerange.DateTimeRange(datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(seconds=300),datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(seconds=300))}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""put_object"",{""Bucket"":self.variables[""bucket_name""], ""Key"":self.variables[""object_name""], ""Body"":""test"",""ContentType"":""text/plain""}, [200, 409])]",group1:user1,S3CompatibleAPI,,head_object,"{""Bucket"":self.variables[""bucket_name""],""Key"":self.variables[""object_name""]}",200,"{""etag"":self.variables['etag']}","{""ETag"":self.variables['etag']}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""delete_object"", {""Bucket"":self.variables[""bucket_name""],""Key"":self.variables[""object_name""]}, [204, 404]),
+(""group1:user1"", ""S3CompatibleAPI"", ""delete_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [204, 404])]",TU1 head object,
+TestObject#test_curd_object#11,TU1 get object,ObjectCRUD,P0,"{""bucket_name"":""vcd0.org1.tu1.s3.cmp.put-object.%s"" % timestamp(format=""%Y%m%d%H%M%S%f"")[:-3], ""object_name"":""vcd0.org1.tu1.s3.cmp.%s.txt"" % timestamp(format=""%Y-%m-%dt%H-%M-%S.%fz""), ""etag"":'""%s""' % calculate_md5(""test""), ""last_modified_range"":datetimerange.DateTimeRange(datetime.datetime.now(tz=datetime.timezone.utc) - datetime.timedelta(seconds=300),datetime.datetime.now(tz=datetime.timezone.utc) + datetime.timedelta(seconds=300))}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""put_object"",{""Bucket"":self.variables[""bucket_name""], ""Key"":self.variables[""object_name""], ""Body"":""test"",""ContentType"":""text/plain""}, [200, 409])]",group1:user1,S3CompatibleAPI,,get_object,"{""Bucket"":self.variables[""bucket_name""],""Key"":self.variables[""object_name""]}",200,,"{""ETag"":self.variables['etag'],""ContentLength"":4}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""delete_object"", {""Bucket"":self.variables[""bucket_name""],""Key"":self.variables[""object_name""]}, [204, 404]),
+(""group1:user1"", ""S3CompatibleAPI"", ""delete_bucket"", {""Bucket"":self.variables[""bucket_name""]}, [204, 404])]",TU1 get object,
