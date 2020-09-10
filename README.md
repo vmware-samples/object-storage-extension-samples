@@ -6,7 +6,7 @@ Oject Storage Extension Samples
 
 Since version 2.0, OSE opens the extensibility framework for vendor and community to integrate third-party S3 compliant object storage platforms with Cloud Director. The extensibility framework offers a set of REST APIs for the vendor to implement upon the third-party object storage platform, called Object Storage Interoperability Services (OSIS). Below diagram gives the overview of OSE architecture and OSIS' position in the system.
 
-![OSE Architecture](ose-architecture-2-0.png?raw=true)
+![OSE Architecture](assets/ose-architecture-2-0.png?raw=true)
 
 This open source project includes sample implentation of extensively integrated object storage platforms for OSE, but not limited to these.
 
