@@ -14,6 +14,7 @@ This open source project includes sample implentation of extensively integrated 
 * [OSIS CEPH Reference Implementation](vmware-ose-ceph-ref-impl/) is an implementation of OSIS for CEPH.
 * [OSIS Stub](vmware-ose-osis-stub/) is a Java REST client stub of OSIS specification.
 * [OSIS Verifier](vmware-ose-osis-verifier/) is a tool to verify the readiness and compatibiity of the OSIS implementation.
+* [Common Test Suites](vmware-ose-common-test-suites/) is a common test suites based on [boto3](https://github.com/boto/boto3) to verify the compatibility of OSE certified storage platforms, like Clouian HyperStore and DELL ECS.
 
 ## Contributing
 
