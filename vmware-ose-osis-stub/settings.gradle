@@ -1,0 +1,6 @@
+rootProject.name = 'osis.platform'
+include 'osis-app'
+include 'osis-core'
+include 'platform-admin-client'
+
+

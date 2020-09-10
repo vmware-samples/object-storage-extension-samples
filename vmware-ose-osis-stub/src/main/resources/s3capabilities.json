@@ -1,0 +1,284 @@
+{
+  "exclusions": {
+    "abort_multipart_upload": {
+      "by_headers": [
+        "x-amz-request-payer"
+      ]
+    },
+    "complete_multipart_upload": {
+      "by_headers": [
+        "x-amz-request-payer"
+      ]
+    },
+    "copy_object": {
+      "by_headers": [
+        "Cache-Control",
+        "Content-Disposition",
+        "Content-Encoding",
+        "Content-Language",
+        "Content-Type",
+        "x-amz-copy-source-if-match",
+        "x-amz-copy-source-if-modified-since",
+        "x-amz-copy-source-if-none-match",
+        "x-amz-copy-source-if-unmodified-since",
+        "Expires",
+        "x-amz-grant-full-control",
+        "x-amz-grant-read",
+        "x-amz-grant-read-acp",
+        "x-amz-grant-write-acp",
+        "x-amz-metadata-directive",
+        "x-amz-tagging-directive",
+        "x-amz-server-side-encryption",
+        "x-amz-storage-class",
+        "x-amz-website-redirect-location",
+        "x-amz-server-side-encryption-customer-algorithm",
+        "x-amz-server-side-encryption-customer-key",
+        "x-amz-server-side-encryption-customer-key-MD5",
+        "x-amz-server-side-encryption-aws-kms-key-id",
+        "x-amz-server-side-encryption-context",
+        "x-amz-copy-source-server-side-encryption-customer-algorithm",
+        "x-amz-copy-source-server-side-encryption-customer-key",
+        "x-amz-copy-source-server-side-encryption-customer-key-MD5",
+        "x-amz-request-payer",
+        "x-amz-tagging",
+        "x-amz-object-lock-mode",
+        "x-amz-object-lock-retain-until-date",
+        "x-amz-object-lock-legal-hold"
+      ]
+    },
+    "create_bucket": {
+      "by_headers": [
+        "x-amz-grant-full-control",
+        "x-amz-grant-read",
+        "x-amz-grant-read-acp",
+        "x-amz-grant-write",
+        "x-amz-grant-write-acp"
+      ]
+    },
+    "create_multipart_upload": {
+      "by_headers": [
+        "Cache-Control",
+        "Content-Disposition",
+        "Content-Encoding",
+        "Content-Language",
+        "Expires",
+        "x-amz-grant-full-control",
+        "x-amz-grant-read",
+        "x-amz-grant-read-acp",
+        "x-amz-grant-write-acp",
+        "x-amz-server-side-encryption",
+        "x-amz-storage-class",
+        "x-amz-website-redirect-location",
+        "x-amz-server-side-encryption-customer-algorithm",
+        "x-amz-server-side-encryption-customer-key",
+        "x-amz-server-side-encryption-customer-key-MD5",
+        "x-amz-server-side-encryption-aws-kms-key-id",
+        "x-amz-server-side-encryption-context",
+        "x-amz-request-payer",
+        "x-amz-tagging",
+        "x-amz-object-lock-mode",
+        "x-amz-object-lock-retain-until-date",
+        "x-amz-object-lock-legal-hold"
+      ]
+    },
+    "get_bucket_lifecycle_configuration": {},
+    "put_bucket_lifecycle_configuration": {},
+    "delete_bucket_lifecycle_configuration": {},
+    "put_bucket_policy": {},
+    "delete_bucket_policy": {},
+    "get_bucket_policy": {},
+    "delete_bucket_tagging": {},
+    "get_bucket_tagging": {},
+    "put_bucket_tagging": {},
+    "get_bucket_versioning": {},
+    "get_bucket_website": {},
+    "put_bucket_website": {},
+    "delete_bucket_website": {},
+    "get_object": {
+      "by_params": [
+        "partNumber",
+        "responseCacheControl",
+        "responseContentDisposition",
+        "responseContentEncoding",
+        "responseContentLanguage",
+        "responseContentType",
+        "responseExpires",
+        "versionId"
+      ],
+      "by_headers": [
+        "response-cache-control",
+        "response-content-disposition",
+        "response-content-encoding",
+        "response-content-language",
+        "response-content-type",
+        "response-expires",
+        "versionId",
+        "x-amz-server-side-encryption-customer-algorithm",
+        "x-amz-server-side-encryption-customer-key",
+        "x-amz-server-side-encryption-customer-key-MD5",
+        "x-amz-request-payer"
+      ]
+    },
+    "get_object_acl": {
+      "by_params": [
+        "versionId"
+      ],
+      "by_headers": [
+        "x-amz-request-payer"
+      ]
+    },
+    "get_object_legal_hold": {
+      "by_headers": [
+        "x-amz-request-payer"
+      ]
+    },
+    "get_object_lock_configuration": {},
+    "get_object_retention": {
+      "by_headers": [
+        "x-amz-request-payer"
+      ]
+    },
+    "get_object_tagging": {},
+    "put_object_tagging": {},
+    "delete_object_tagging": {},
+    "head_bucket": {},
+    "head_object": {},
+    "list_multipart_uploads": {},
+    "list_objects": {},
+    "list_objectsV2": {},
+    "list_object_versions": {},
+    "list_parts": {},
+    "get_bucket_accelerate_configuration": {},
+    "put_bucket_accelerate_configuration": {},
+    "put_bucket_acl": {
+      "by_headers": [
+        "x-amz-acl",
+        "Content-MD5",
+        "x-amz-grant-full-control",
+        "x-amz-grant-read",
+        "x-amz-grant-read-acp",
+        "x-amz-grant-write",
+        "x-amz-grant-write-acp"
+      ],
+      "by_payload": [
+        "emailAddress",
+        "type",
+        "uri"
+      ]
+    },
+    "put_bucket_notification": {},
+    "put_bucket_versioning": {
+      "by_headers": [
+        "Content-MD5",
+        "x-amz-mfa"
+      ],
+      "by_payload": [
+        "mfaDelete"
+      ]
+    },
+    "put_object": {
+      "by_headers": [
+        "Cache-Control",
+        "Content-Disposition",
+        "Content-Encoding",
+        "Content-Language",
+        "Content-Type",
+        "Expires",
+        "x-amz-grant-full-control",
+        "x-amz-grant-read",
+        "x-amz-grant-read-acp",
+        "x-amz-grant-write-acp",
+        "x-amz-server-side-encryption",
+        "x-amz-storage-class",
+        "x-amz-website-redirect-location",
+        "x-amz-server-side-encryption-customer-algorithm",
+        "x-amz-server-side-encryption-customer-key",
+        "x-amz-server-side-encryption-customer-key-MD5",
+        "x-amz-server-side-encryption-aws-kms-key-id",
+        "x-amz-server-side-encryption-context",
+        "x-amz-request-payer",
+        "x-amz-tagging",
+        "x-amz-object-lock-mode",
+        "x-amz-object-lock-retain-until-date",
+        "x-amz-object-lock-legal-hold"
+      ]
+    },
+    "put_object_acl": {
+      "by_headers": [
+        "x-amz-acl",
+        "Content-MD5",
+        "x-amz-grant-full-control",
+        "x-amz-grant-read",
+        "x-amz-grant-read-acp",
+        "x-amz-grant-write",
+        "x-amz-grant-write-acp",
+        "x-amz-request-payer"
+      ],
+      "by_payload": [
+        "emailAddress",
+        "type",
+        "uri"
+      ]
+    },
+    "put_object_legal_hold": {
+      "by_headers": [
+        "x-amz-request-payer",
+        "Content-MD5"
+      ]
+    },
+    "put_object_lock_configuration": {
+      "by_headers": [
+        "x-amz-request-payer",
+        "x-amz-bucket-object-lock-token",
+        "Content-MD5"
+      ]
+    },
+    "put_object_retention": {
+      "by_headers": [
+        "x-amz-request-payer",
+        "x-amz-bypass-governance-retention",
+        "Content-MD5"
+      ]
+    },
+    "upload_part": {},
+    "get_bucket_lifecycle": {},
+    "put_bucket_lifecycle": {},
+    "delete_bucket_lifecycle": {},
+    "get_bucket_encryption": {},
+    "put_bucket_encryption": {},
+    "delete_bucket_encryption": {},
+    "get_bucket_cors": {},
+    "put_bucket_cors": {},
+    "delete_bucket_cors": {},
+    "get_bucket_policy_status": {},
+    "get_bucket_logging": {},
+    "put_bucket_logging": {},
+    "get_bucket_request_payment": {},
+    "put_bucket_request_payment": {},
+    "list_bucket_metrics_configuration": {},
+    "get_bucket_metrics_configuration": {},
+    "put_bucket_metrics_configuration": {},
+    "delete_bucket_metrics_configuration": {},
+    "get_bucket_replication": {},
+    "put_bucket_replication": {},
+    "delete_bucket_replication": {},
+    "get_bucket_accelerate": {},
+    "put_bucket_accelerate": {},
+    "list_bucket_inventory_configuration": {},
+    "get_bucket_inventory_configuration": {},
+    "put_bucket_inventory_configuration": {},
+    "delete_bucket_inventory_configuration": {},
+    "list_bucket_analytics_configuration": {},
+    "get_bucket_analytics_configuration": {},
+    "put_bucket_analytics_configuration": {},
+    "delete_bucket_analytics_configuration": {},
+    "get_public_access_block": {},
+    "put_public_access_block": {},
+    "delete_public_access_block": {},
+    "delete_objects": {},
+    "upload_part_copy": {},
+    "get_object_torrent": {},
+    "restore_object": {},
+    "select_object_content": {}
+  }
+}

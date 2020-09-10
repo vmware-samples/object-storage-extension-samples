@@ -1,0 +1,36 @@
+osis:
+  platform:
+    name:
+    region:
+    storage-classes:
+    version:
+    admin:
+      endpoint:
+      username:
+      password:
+    s3:
+      endpoint:
+      access-key:
+      secret-key:
+    console:
+      endpoint:
+  api:
+    version: 1.0.0
+
+server:
+  port: 8443
+  verbose: true
+  ssl:
+    key-store:
+    key-store-password:
+    key-store-type:
+    key-alias:
+
+security:
+  require-ssl: true
+  jwt:
+    enabled: false
+    access-token-expiration-time: 15
+    refresh_token_expiration_time: 262800
+    token-issuer: http://platform.osis.ose.vmware.com
+    token-signing-key: thisisosis

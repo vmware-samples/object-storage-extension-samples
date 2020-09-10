@@ -1,0 +1,98 @@
+buildscript {
+    ext {
+        springBootVersion = '2.2.4.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        maven {
+            url = 'http://repo.maven.apache.org/maven2'
+        }
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java'
+apply plugin: 'idea'
+
+bootJar {
+    mainClassName = 'com.vmware.osis.Application'
+    enabled = true
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.vmware.osis.Application'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+subprojects {
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["$projectDir/src/main/resources"]
+        }
+    }
+}
+
+dependencies {
+    compile project('osis-app')
+}
+
+configure(allprojects.findAll { it.name != 'platform-admin-client' }) {
+    ext {
+        springBootVersion = '2.2.4.RELEASE'
+    }
+    dependencies {
+        compile "org.springframework.boot:spring-boot-starter-webflux:$springBootVersion"
+        compile "org.springframework.boot:spring-boot-starter-hateoas:$springBootVersion"
+        compile "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
+        compile "org.springframework.boot:spring-boot-starter-security:$springBootVersion"
+        testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion") {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+        compile 'io.springfox:springfox-swagger2:2.8.0'
+        compile 'io.springfox:springfox-swagger-ui:2.8.0'
+        compile 'javax.xml.bind:jaxb-api:2.2.11'
+        compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.5'
+        compile 'org.openapitools:jackson-databind-nullable:0.1.0'
+        compile 'javax.validation:validation-api:2.0.1.Final'
+        compile 'org.hsqldb:hsqldb:2.3.2'
+        compile 'org.postgresql:postgresql:42.2.13'
+        compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.11.0'
+        compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.11.0'
+        compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+        compile 'io.jsonwebtoken:jjwt:0.9.1'
+        implementation 'org.springframework.plugin:spring-plugin-core:1.2.0.RELEASE'
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+    }
+}
+
+group = 'com.vmware.osis'
+version = '1.0.0'
+description = 'osis.platform'
+sourceCompatibility = '1.8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

@@ -1,0 +1,6 @@
+dependencies {
+    compile project(':platform-admin-client')
+}
+test {
+    useJUnitPlatform()
+}
