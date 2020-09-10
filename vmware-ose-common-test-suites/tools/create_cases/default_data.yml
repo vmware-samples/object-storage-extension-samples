@@ -1,0 +1,221 @@
+# default value
+abort_multipart_upload:
+  Bucket: bkt-abort-multipart-upload
+  Key: 'string'
+  UploadId: 'string'
+  RequestPayer: 'requester'
+
+complete_multipart_upload:
+  Bucket: bkt-complete-multipart-upload
+  Key: obj-default
+  MultipartUpload: {'Parts': [{'ETag': 'string', 'PartNumber': 123},]}
+  UploadId: 'string'
+  RequestPayer: 'requester'
+
+copy_object:
+  Bucket: bkt-copy-object
+  ACL: private
+  CacheControl: 'string'
+  ContentDisposition: 'string'
+  ContentEncoding: 'string'
+  ContentLanguage: 'string'
+  ContentType: 'string'
+  CopySource: #'string' or {'Bucket': 'string', 'Key': 'string', 'VersionId': 'string'}
+  CopySourceIfMatch: 'string'
+  CopySourceIfModifiedSince: datetime(2015, 1, 1)
+  CopySourceIfNoneMatch: 'string'
+  CopySourceIfUnmodifiedSince: datetime(2015, 1, 1)
+  Expires: datetime(2015, 1, 1)
+  GrantFullControl: 'string'
+  GrantRead: 'string'
+  GrantReadACP: 'string'
+  GrantWriteACP: 'string'
+  Key: obj-default
+  Metadata: {'key': 'value'}
+  MetadataDirective: #'COPY'|'REPLACE'
+  TaggingDirective: #'COPY'|'REPLACE'
+  ServerSideEncryption: #'AES256'|'aws:kms'
+  StorageClass: #'STANDARD'|'REDUCED_REDUNDANCY'|'STANDARD_IA'|'ONEZONE_IA'|'INTELLIGENT_TIERING'|'GLACIER'|'DEEP_ARCHIVE',
+  WebsiteRedirectLocation: 'string'
+  SSECustomerAlgorithm: 'string'
+  SSECustomerKey: 'string'
+  SSEKMSKeyId: 'string'
+  SSEKMSEncryptionContext: 'string'
+  CopySourceSSECustomerAlgorithm: 'string'
+  CopySourceSSECustomerKey: 'string'
+  RequestPayer: 'requester'
+  Tagging: 'string'
+  ObjectLockMode: #'GOVERNANCE'|'COMPLIANCE',
+  ObjectLockRetainUntilDate: datetime(2015, 1, 1)
+  ObjectLockLegalHoldStatus: #'ON'|'OFF'
+
+create_bucket:
+  Bucket: bkt-create-bucket
+  ACL: private #'private'|'public-read'|'public-read-write'|'authenticated-read'
+  CreateBucketConfiguration: {'LocationConstraint': 'EU'} # 'EU'|'eu-west-1'|'us-west-1'|'us-west-2'|'ap-south-1'|'ap-southeast-1'|'ap-southeast-2'|'ap-northeast-1'|'sa-east-1'|'cn-north-1'|'eu-central-1'
+  GrantFullControl: id=TODO
+  GrantRead: id=TODO
+  GrantReadACP: id=TODO
+  GrantWrite: id=TODO
+  GrantWriteACP: id=TODO
+  ObjectLockEnabledForBucket: True #boolean
+
+create_multipart_upload:
+  ACL: private
+  Bucket: bkt-create-multipart-upload
+  CacheControl: 'string'
+  ContentDisposition: 'string'
+  ContentEncoding: 'string'
+  ContentLanguage: 'string'
+  ContentType: 'string'
+  Expires: datetime(2015, 1, 1)
+  GrantFullControl: 'string'
+  GrantRead: 'string'
+  GrantReadACP: 'string'
+  GrantWriteACP: 'string'
+  Key: obj-default
+  Metadata: {'key': 'value'}
+  ServerSideEncryption: AES256
+  StorageClass: STANDARD
+  WebsiteRedirectLocation: 'string'
+  SSECustomerAlgorithm: 'string'
+  SSECustomerKey: 'string'
+  SSEKMSKeyId: 'string'
+  SSEKMSEncryptionContext: 'string'
+  RequestPayer: 'requester'
+  Tagging: 'string'
+  ObjectLockMode: #'GOVERNANCE'|'COMPLIANCE'
+  ObjectLockRetainUntilDate: datetime(2015, 1, 1)
+  ObjectLockLegalHoldStatus: #'ON'|'OFF'
+
+delete_bucket:
+  Bucket: bkt-delete-bucket
+
+delete_bucket_analytics_configuration:
+  Bucket: bkt-delete-bucket-analytics
+  Id: 'string'
+
+delete_bucket_cors:
+  Bucket: bkt-delete-bucket-cors
+
+delete_bucket_encryption:
+  Bucket: bkt-delete-bucket-encryption
+
+delete_bucket_inventory_configuration:
+  Bucket: bkt-delete-bucket-inventory
+  Id: 'string'
+
+delete_bucket_lifecycle:
+  Bucket: bkt-delete-bucket-lifecycle
+
+delete_bucket_metrics_configuration:
+  Bucket: bkt-delete-bucket-metrics-configuration,
+  Id: 'string'
+
+delete_bucket_policy:
+  Bucket: bkt-delete-bucket-policy
+
+delete_bucket_replication:
+  Bucket: bkt-delete-bucket-replication
+
+delete_bucket_tagging:
+  Bucket: bkt-delete-bucket-tagging
+
+delete_bucket_website:
+  Bucket: bkt-delete_bucket_website
+
+delete_object:
+  Bucket: bkt-delete-object
+  Key: obj-default
+  MFA: 'string'
+  VersionId: 'string'
+  RequestPayer: 'requester'
+  BypassGovernanceRetention: # True|False
+
+delete_object_tagging:
+  Bucket: bkt-delete-object-tagging
+  Key: obj-default
+  VersionId: 'string'
+
+delete_objects:
+  Bucket: bkt-delete-objects
+  Delete: {'Objects': [{ 'Key': 'string', 'VersionId': 'string'},], 'Quiet': True|False}
+  MFA: 'string'
+  RequestPayer: 'requester'
+  BypassGovernanceRetention: #True|False
+
+delete_public_access_block:
+  Bucket: bkt-delete_public_access_block
+
+get_bucket_accelerate_configuration:
+  Bucket: bkt-get_bucket_accelerate
+
+get_bucket_acl:
+  Bucket: bkt-get-bucket-acl
+
+get_bucket_analytics_configuration:
+  Bucket: bkt-get-bucket-analytics
+  Id: 'string'
+
+get_bucket_cors:
+  Bucket: bkt-get-bucket-cors
+
+get_bucket_encryption:
+  Bucket: bkt-get-bucket-encryption
+
+get_bucket_inventory_configuration:
+  Bucket: bkt-get-bucket-inventory
+  Id: 'string'
+
+get_bucket_lifecycle:
+  Bucket: bkt-get-bucket-lifecycle
+
+get_bucket_lifecycle_configuration:
+  Bucket: bkt-get-bucket-lifecycle
+
+get_bucket_location:
+  Bucket: bkt-get-bucket-location
+
+get_bucket_logging:
+  Bucket: bkt-get-bucket-logging
+
+get_bucket_metrics_configuration:
+  Bucket: bkt-get-bucket-metrics
+  Id: 'string'
+
+get_bucket_notification:
+  Bucket: bkt-get-bucket-notification
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+list_objects:
+  Bucket: bkt-list-objects
+  Delimiter: /
+  EncodingType:
+  Marker:
+  MaxKeys: 1000
+  Prefix: folder/
+  RequestPayer:
+
+download_file:
+download_fileobj:
+generate_presigned_post:
+generate_presigned_url:

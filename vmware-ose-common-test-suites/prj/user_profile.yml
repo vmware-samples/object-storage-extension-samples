@@ -1,0 +1,102 @@
+# vcd url
+vcd_url: https://oss-vcd-site2.eng.vmware.com
+# ose url
+ose_url: https://10.110.124.123
+# virtual host style
+virtual_host_style: False
+# region
+region: region-1
+# Location
+location_constraint:
+
+# vendor s3 endpoint
+vendor_s3_endpoint: https://10.139.113.221:443 # https://s3.amazonaws.com/
+vendor_region: region-1 # us-east-1
+vendor_location_constraint:
+
+# Two groups are provisioned
+# Group1 is the main test group, user1 is the test user
+# user2@group1 and user1@group2 is the two validate user for ACL testing
+# Please update based on your environment so that ACL cases can run well.
+group1:
+  user1:
+    login_credential:
+      vcd_user: oss-auto-tu1@ossauto1
+      vcd_password: vmware
+
+  user2:
+    login_credential:
+      vcd_user: oss-auto-tu2@ossauto1
+      vcd_password: vmware
+group2:
+  user1:
+    login_credential:
+      vcd_user: oss-auto-tu1@ossauto2
+      vcd_password: vmware
+
+log_level: DEBUG
+storage:
+  region: region-1
+  storageClass: STANDARD
+
+
+constants:
+  all-users-uri: http://acs.amazonaws.com/groups/global/AllUsers
+  anonymous-display-name: anonymous
+  anonymous-id: '|anonymous'
+
+# All test buckets would start with prefix below.
+test_bucket_prefix: s3testauto
+
+case_scope:
+  full:
+  cloudian:
+    excludes:
+      - get_bucket_analytics_configuration # analytics
+      - delete_bucket_analytics_configuration
+      - put_bucket_analytics_configuration
+      - put_bucket_lifecycle_configuration|Tag # bucket lifecycle
+      - put_bucket_lifecycle_configuration|Transition
+      - put_bucket_lifecycle_configuration|Combination
+      - get_bucket_location # location
+      - get_public_access_block # access block
+      - put_public_access_block
+      - delete_public_access_block
+      - test_restore # restore
+  ecs:
+    excludes:
+      - delete_bucket_encryption # bucket enc
+      - get_bucket_encryption
+      - put_bucket_encryption
+      - put_object_lock_configuration # lock
+      - get_object_lock_configuration
+      - put_object_legal_hold # legal hold
+      - get_object_legal_hold
+      - put_object_retention # retention
+      - get_object_retention
+      - get_bucket_location # location
+      - put_bucket_tagging # tagging
+      - delete_bucket_tagging
+      - put_object_tagging
+      - put_object_tagging
+      - put_bucket_logging # logging
+      - get_bucket_logging
+
+email_config:
+  emailfor: All
+  receivers:
+  - elvisy@vmware.com
+  sender: s3-test@vmware.com
+  subject: OSE-s3-Test-Report
+  email_server: smtp.vmware.com
+
+upload_config:
+  artifacts_env:
+    usr: oss-artifactory
+    password: APEw3Pn7Jn4qwei9
+    logs_link: https://build-artifactory.eng.vmware.com/artifactory/list/vcpp-oss-generic-local/log_dir/
+    log_dir: log_dir
+    env_profile: env_profile_dir
+    suites: suites_dir
+    testdata: test_data_dir
+
