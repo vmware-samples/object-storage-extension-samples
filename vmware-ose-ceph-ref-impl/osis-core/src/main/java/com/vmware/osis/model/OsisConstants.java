@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Copyright 2020 program was created by VMware.
+ * Copyright 2020 VMware, Inc.
  * SPDX-License-Identifier: Apache License 2.0
  */
 public final class OsisConstants {
