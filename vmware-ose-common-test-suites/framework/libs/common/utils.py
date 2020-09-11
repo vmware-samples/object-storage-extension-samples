@@ -387,5 +387,4 @@ def new_passdown_variables(actual_response, global_variables=None,
 
 
 if __name__ == '__main__':
-
     pass
