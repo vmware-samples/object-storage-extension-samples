@@ -513,30 +513,6 @@ class S3CompatibleAPI(object):
 
 
 if __name__ == "__main__":
-    import logging
-
-    logging.basicConfig(level=logging.DEBUG,
-                        format='%(asctime)s %(levelname)-8s %(message)s',
-                        datefmt='%a, %d %b %Y %H:%M:%S')
-
-    api_client = S3CompatibleAPI(
-        endpoint_url="https://10.110.126.113:8443/api/v1/s3/",
-        aws_access_key_id="72d20de769137509c3e9",
-        aws_secret_access_key="Q7LGNmeb78+oka7FupqzAQGhDZ/0E2va8DO6fTfR",
-        region_name='region-1'
-    )
-    # returns = api_client.put_multiple_objects(Count=2,
-    #                                           Size=range(10, 1024),
-    #                                           Bucket="test.create-buckets.0",
-    #                                           Prefix="test",
-    #                                           Keys=["test.key_a"],
-    #                                           BrokenOnFailure=True,
-    #                                           Parallel=True)
-    # print(returns.keys())
-    # returns = api_client.create_multiple_buckets(Count=100, Prefix="test.create-buckets")
-    # print(returns.keys())
-    for i in range(1,66):
-        api_client.delete_bucket(Bucket="test.create-buckets.%s" % i)
 
     pass
 
