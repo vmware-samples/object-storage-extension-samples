@@ -129,25 +129,6 @@ class CloudianVendorClient:
 
 
 if __name__ == '__main__':
-    client = CloudianVendorClient()
-    '''
-    client.set_admin_session(endpoint="https://10.139.113.221:19443", login_user="sysadmin", login_pwd="public")
-    headers = {
-            'Content-Type': 'application/xml',
-            'Accept': 'application/json'
-        }
-    r = client.get_user_details(group_id="d0b7ed15-75cb-482d-a930-60df0a6eb5d8", user_id="chrisb", req_header=headers)
-    print(r)
-    # print(r['canonicalUserId'])
-    '''
-    s3_endpoint = 'https://10.139.113.221/'
-    s3_access_key = '684498f388e55fd77279'  # oss-auto-tu1@ossauto1
-    s3_secret_key = 'soYCCA3anqb4BsHUye6RYoKUe8s0+fW05sYLYltu'
-    client.set_s3_session(s3_endpoint, s3_access_key, s3_secret_key)
-
-    req = {'Bucket': 'bkt.1'}
-    r = client.s3_client.create_bucket(**req)
-    print(client.print_s3_response(r))
-    print(r["ResponseMetadata"])
+    pass
 
 

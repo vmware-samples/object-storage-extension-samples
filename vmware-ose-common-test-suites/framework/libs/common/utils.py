@@ -387,8 +387,4 @@ def new_passdown_variables(actual_response, global_variables=None,
 
 
 if __name__ == '__main__':
-    conf = dict
-
-    remove_test_buckets(conf)
-
     pass
