@@ -1,15 +1,20 @@
 
-# object-storage-extension-samples
+# Oject Storage Extension Samples
 
 ## Overview
 [VMware Cloud Director Object Storage Extension](https://docs.vmware.com/en/VMware-Cloud-Director-Object-Storage-Extension/index.html) (OSE) is a midware which provides the capability of consuming object storage services for Cloud Director users.
 
-Since version 2.0, OSE opens extensibility framework for vendor and community to integrate third-party object storage platforms. 
+Since version 2.0, OSE opens the extensibility framework for vendor and community to integrate third-party S3 compliant object storage platforms with Cloud Director. The extensibility framework offers a set of REST APIs for the vendor to implement upon the third-party object storage platform, called Object Storage Interoperability Services (OSIS). Below diagram gives the overview of OSE architecture and OSIS' position in the system.
 
-This project includes sample implentation of extensively integrated object storage platforms for OSE, but not limited to these.
+![OSE Architecture](assets/ose-architecture-2-0.png?raw=true)
+
+This open source project includes sample implentation of extensively integrated object storage platforms for OSE, but not limited to these.
 
 ## Samples
-* Object Storage Interoperability Services (OSIS) CEPH Reference Implementation is an implementation of OSIS for CEPH.
+* [OSIS CEPH Reference Implementation](vmware-ose-ceph-ref-impl/) is an implementation of OSIS for CEPH.
+* [OSIS Stub](vmware-ose-osis-stub/) is a Java REST client stub of OSIS specification.
+* [OSIS Verifier](vmware-ose-osis-verifier/) is a tool to verify the readiness and compatibiity of the OSIS implementation.
+* [Common Test Suites](vmware-ose-common-test-suites/) is developed based on [boto3](https://github.com/boto/boto3) to verify the compatibility of OSE certified storage platforms, like Clouian HyperStore and DELL ECS.
 
 ## Contributing
 
