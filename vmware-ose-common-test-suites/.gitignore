@@ -1,0 +1,17 @@
+.idea/misc.xml
+.idea/workspace.xml
+.idea/s3-test.iml
+.idea/codeStyles/Project.xml
+.idea/*
+.idea/*
+venv
+lib
+bin
+pyvenv.cfg
+*.pyc
+.DS_Store
+*.log
+*.html
+*.crt
+*.tmp
+*auto.csv
