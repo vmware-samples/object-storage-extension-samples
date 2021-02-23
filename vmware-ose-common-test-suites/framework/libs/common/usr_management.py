@@ -60,18 +60,4 @@ class UsrMgmt(BaseOSSAPI):
 
 
 if __name__ == "__main__":
-    url = "https://oss-vcd-site2.eng.vmware.com/api/sessions"
-    oss_host = "https://10.110.124.123:443"
-    TA_usr = "oss-man-tu1@ossman1"
-    TA_pwd = "vmware"
-    PA_usr = "oss-su@system"
-    PA_pwd = "vmware"
-
-    from framework.libs.common.login_util import LoginUtil
-    login_util = LoginUtil(url, TA_usr, TA_pwd)
-    login_util.get_token()
-    usr_mgmt = UsrMgmt(login_util, oss_host)
-    usr_mgmt.get_current_user()
-    usr_mgmt.get_user_credentials()
-
-    print(usr_mgmt.variables)
+    pass
