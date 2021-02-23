@@ -15,7 +15,7 @@ class ArgMgmt:
         parser.add_argument('--priority', type=str, default='smoke',
                             choices=['smoke', 'regression', 'quick', 'full'],
                             help='Case priority')
-        parser.add_argument('--scope', type=str, default='full', choices=['full', 'ecs', 'cloudian'],
+        parser.add_argument('--scope', type=str, default='cloudian', choices=['full', 'ecs', 'cloudian'],
                             help='Case scope')
 
         parser.add_argument('--virtual-host-style', action='store_true',

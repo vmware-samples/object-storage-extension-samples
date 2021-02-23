@@ -154,11 +154,16 @@ class S3CompatibleAPI(object):
         return delete_objects_actual_response or list_objects_actual_response
 
     def force_delete_bucket(self, **req_data):
-        former_response = self.empty_bucket(**req_data)
-        # if former_response["ResponseMetadata"]["HTTPStatusCode"] == 404:
-        #     return former_response
-        # else:
-        return self.delete_bucket(**req_data)
+        res = None
+        try:
+            res = self.empty_bucket(**req_data)
+        except Exception as e:
+            print(e)
+        try:
+            res = self.delete_bucket(**req_data)
+        except Exception as e:
+            print(e)
+        return res
 
     def empty_multipart_uploads(self, **req_data):
         abort_multipart_upload_actual_response = None
