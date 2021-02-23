@@ -282,7 +282,7 @@ def remove_test_buckets(config_profile):
     test_bucket_prefix = config_profile.get('test_bucket_prefix')
     if isinstance(buckets, list) and len(buckets) > 0:
         for bkt_item in buckets:
-            if bkt_item.get('Name').startswith(test_bucket_prefix):
+            if test_bucket_prefix in bkt_item.get('Name'):
                 print(bkt_item)
                 boto3_client.force_delete_bucket(Bucket=bkt_item.get('Name'))
 

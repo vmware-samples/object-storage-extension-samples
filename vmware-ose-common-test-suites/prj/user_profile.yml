@@ -82,19 +82,21 @@ case_scope:
       - put_bucket_logging # logging
       - get_bucket_logging
 
+# Update below parameters
+# if the test report needs to be uploaded to a artifacts server and emailed
 email_config:
   emailfor: All
   receivers:
-  - elvisy@vmware.com
-  sender: s3-test@vmware.com
+  - receiver@domain.com
+  sender: sender@domain.com
   subject: OSE-s3-Test-Report
-  email_server: smtp.vmware.com
+  email_server: smtp.domain.com
 
 upload_config:
   artifacts_env:
-    usr: oss-artifactory
-    password: APEw3Pn7Jn4qwei9
-    logs_link: https://build-artifactory.eng.vmware.com/artifactory/list/vcpp-oss-generic-local/log_dir/
+    usr: artifacts_username
+    password: artifacts_pwd
+    logs_link: https://artifacts_env_link
     log_dir: log_dir
     env_profile: env_profile_dir
     suites: suites_dir
