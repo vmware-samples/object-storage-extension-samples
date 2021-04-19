@@ -48,7 +48,13 @@ class S3CompatibleAPI(object):
         else:
             params['config'] = default_config
 
-        self.__client = boto3.client('s3', **params)
+        self.__client = None
+        while not self.__client:
+            try:
+                self.__client = boto3.client('s3', **params)
+            except:
+                self.__client = None
+
         '''
         Unregister following handlers for testing purpose
         '''
@@ -86,7 +92,11 @@ class S3CompatibleAPI(object):
             list_objects_versions_actual_response = e.response
         list_objects_versions_actual_response.should.have.key("ResponseMetadata").have.key('HTTPStatusCode').within(
             [200, 404])
-        while list_objects_versions_actual_response["ResponseMetadata"]["HTTPStatusCode"] == 200:
+
+        # check if the bucket's object_lock is enabled
+        object_lock_enabled = False
+
+        if list_objects_versions_actual_response["ResponseMetadata"]["HTTPStatusCode"] == 200:
             all_keys_to_delete = []
             if 'Versions' in list_objects_versions_actual_response and isinstance(
                     list_objects_versions_actual_response.get('Versions'), list):
@@ -101,11 +111,19 @@ class S3CompatibleAPI(object):
             if not all_keys_to_delete:
                 return list_objects_versions_actual_response
 
+            # TODO:
+            if object_lock_enabled:
+                # delete retention
+
+                # delete legal hold
+                pass
+
             try:
                 delete_objects_actual_response = self.delete_objects(
                     Delete={"Objects": all_keys_to_delete}, **req_data)
             except botocore.exceptions.ClientError as e:
                 delete_objects_actual_response = e.response
+
             delete_objects_actual_response.should.have.key("ResponseMetadata").have.key('HTTPStatusCode').within(
                 [200, 404])
             if delete_objects_actual_response["ResponseMetadata"]["HTTPStatusCode"] == 200:
@@ -157,12 +175,13 @@ class S3CompatibleAPI(object):
         res = None
         try:
             res = self.empty_bucket(**req_data)
-        except Exception as e:
-            print(e)
+        except botocore.exceptions.ClientError as e:
+            print(e.response)
         try:
             res = self.delete_bucket(**req_data)
-        except Exception as e:
-            print(e)
+        except botocore.exceptions.ClientError as e:
+            if 'Error' in e.response and 'Code' in e.response.get('Error'):
+                print('Failed to remove the bucket due to : ' + e.response.get('Error').get('Code'))
         return res
 
     def empty_multipart_uploads(self, **req_data):
