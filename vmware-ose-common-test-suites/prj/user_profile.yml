@@ -1,7 +1,7 @@
 # vcd url
 vcd_url: https://oss-vcd-site2.eng.vmware.com
 # ose url
-ose_url: https://10.110.124.123
+ose_url: https://oss-vcd.eng.vmware.com:18891
 # virtual host style
 virtual_host_style: False
 # region
