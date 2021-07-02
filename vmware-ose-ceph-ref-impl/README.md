@@ -18,6 +18,7 @@ This project is a reference project for OSIS which integrates [CEPH](https://cep
 - Gradle 6.5.1+ 
 - VMware Cloud Director (10.0+) and Object Storage Extension(2.0+)
 - CEPH (15.2+)
+- Keep clock of OSE server, OSIS server and CEPH cluster synchronized
 
 ## Quick Start Guide
 
