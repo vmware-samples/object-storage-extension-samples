@@ -130,21 +130,21 @@ case_scope:
 
 # Update below parameters
 # if the test report needs to be uploaded to a artifacts server and emailed
-#email_config:
-#  emailfor: All
-#  receivers:
-#  - receiver@domain.com
-#  sender: sender@domain.com
-#  subject: OSE-s3-Test-Report
-#  email_server: smtp.domain.com
-#
-#upload_config:
-#  artifacts_env:
-#    usr: artifacts_username
-#    password: artifacts_pwd
-#    logs_link: https://artifacts_env_link
-#    log_dir: log_dir
-#    env_profile: env_profile_dir
-#    suites: suites_dir
-#    testdata: test_data_dir
+email_config:
+  emailfor: All
+  receivers:
+  - receiver@domain.com
+  sender: sender@domain.com
+  subject: OSE-s3-Test-Report
+  email_server: smtp.domain.com
+
+upload_config:
+  artifacts_env:
+    usr: artifacts_username
+    password: artifacts_pwd
+    logs_link: https://artifacts_env_link
+    log_dir: log_dir
+    env_profile: env_profile_dir
+    suites: suites_dir
+    testdata: test_data_dir
 
