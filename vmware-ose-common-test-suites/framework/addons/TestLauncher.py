@@ -43,7 +43,7 @@ def mylauncher(*case_suite, report_name=current_time, report_title="API_Test", t
     if ose_profile_configs.get('email'):
         print('<----- Test Step: Upload test report and email ----->')
         try:
-            send_email(report_name + '.html', current_path, ose_profile_configs)
+            send_email(report_name + '.html', current_path, ose_profile_configs, res)
         except KeyError as e:
             print(e)
         except FileNotFoundError as e:

@@ -1,23 +1,43 @@
 # vcd url
-vcd_url: https://oss-vcd-site2.eng.vmware.com
+vcd_url: https://alp-vcd102.eng.vmware.com/
 # ose url
 ose_url: https://oss-vcd.eng.vmware.com:18891
 # virtual host style
 virtual_host_style: False
 # region
 region: region-1
-# Location
-location_constraint:
+
+# "TestBucket#test01_test_create_bucket#10" is related with this config.
+# LocationConstraint: Create a bucket within the Location Constraint Region
+#
+# If the case fails, need to update based on actual region.
+location_constraint: region-1
 
 # vendor s3 endpoint
-vendor_s3_endpoint: https://10.139.113.221:443 # https://s3.amazonaws.com/
-vendor_region: region-1 # us-east-1
-vendor_location_constraint:
+# "vendor" info are configured to test directly against vendor s3 endpoint;
+# This is helpful to validate the vendor behaviour;
+# Command e.g:
+# 'python ose-runner.py --log_level debug --testcases TCID --vendor'
 
-# Two groups are provisioned
-# Group1 is the main test group, user1 is the test user
-# user2@group1 and user1@group2 is the two validate user for ACL testing
-# Please update based on your environment so that ACL cases can run well.
+#vendor_s3_endpoint: https://s3.amazonaws.com/
+#vendor_region: us-east-1
+
+vendor_s3_endpoint: https://10.139.113.221:443
+vendor_region: region-1
+
+# Two vCD organizations are needed for acl related testing.
+# With OSE solution, the vCD organization is mapping to a group in vendor. So additional users are needed for
+# ACL testing.
+#
+# vCD organization1 (Group1) is the main test group, user1 and user2 are created in vCD in this organization.
+# The user's role is "Tenant User".
+# Use "username@tenantname" format as input, like user1@org1 and user2@org1.
+#
+# vCD organization2 (Group2) is the validation group, one user user1@org2 is created.
+#
+# user1@org1 is the test user, user2@org1 is to validate the access ability of different user in same group, and
+# user1@org2 is to validate the access ability of user in different groups.
+#
 group1:
   user1:
     login_credential:
@@ -48,57 +68,83 @@ constants:
 # All test buckets would start with prefix below.
 test_bucket_prefix: s3testauto
 
+# case_scope is defined to excludes some case sets for some reason.
+# if the case is not fully implemented or vendor is NOT supported yet.
+# Update based on requirements.
+
+# The case are defined in the .csv test data.
+# The case would be excluded if the excludes are in the "Catalog" column in the .csv.
 case_scope:
   full:
   cloudian:
     excludes:
-      - get_bucket_analytics_configuration # analytics
+      # bucket analytics
+      - get_bucket_analytics_configuration
       - delete_bucket_analytics_configuration
       - put_bucket_analytics_configuration
-      - put_bucket_lifecycle_configuration|Tag # bucket lifecycle
+      # bucket lifecycle
+      - put_bucket_lifecycle_configuration|Tag
       - put_bucket_lifecycle_configuration|Transition
       - put_bucket_lifecycle_configuration|Combination
-      - get_bucket_location # location
-      - get_public_access_block # access block
+      # bucket location
+      - get_bucket_location
+      # public access block
+      - get_public_access_block
       - put_public_access_block
       - delete_public_access_block
-      - test_restore # restore
+      # restore
+      - test_restore
+      # object lock
+      - put_object_lock_configuration
+      - get_object_lock_configuration
+      - put_object|ObjectLockMode
+      - create_multipart_upload|ObjectLockMode|ObjectLockRetainUntilDate
+      - create_multipart_upload|ObjectLockLegalHoldStatus
+      - put_object_retention
+      - create_bucket|ObjectLockEnabledForBucket
   ecs:
     excludes:
-      - delete_bucket_encryption # bucket enc
+      # bucket enc
+      - delete_bucket_encryption
       - get_bucket_encryption
       - put_bucket_encryption
-      - put_object_lock_configuration # lock
+      # lock
+      - put_object_lock_configuration
       - get_object_lock_configuration
-      - put_object_legal_hold # legal hold
+      # legal hold
+      - put_object_legal_hold
       - get_object_legal_hold
-      - put_object_retention # retention
+      # retention
+      - put_object_retention
       - get_object_retention
-      - get_bucket_location # location
-      - put_bucket_tagging # tagging
+      # location
+      - get_bucket_location
+      # tagging
+      - put_bucket_tagging
       - delete_bucket_tagging
       - put_object_tagging
       - put_object_tagging
-      - put_bucket_logging # logging
+      # logging
+      - put_bucket_logging
       - get_bucket_logging
 
 # Update below parameters
 # if the test report needs to be uploaded to a artifacts server and emailed
-email_config:
-  emailfor: All
-  receivers:
-  - receiver@domain.com
-  sender: sender@domain.com
-  subject: OSE-s3-Test-Report
-  email_server: smtp.domain.com
-
-upload_config:
-  artifacts_env:
-    usr: artifacts_username
-    password: artifacts_pwd
-    logs_link: https://artifacts_env_link
-    log_dir: log_dir
-    env_profile: env_profile_dir
-    suites: suites_dir
-    testdata: test_data_dir
+#email_config:
+#  emailfor: All
+#  receivers:
+#  - receiver@domain.com
+#  sender: sender@domain.com
+#  subject: OSE-s3-Test-Report
+#  email_server: smtp.domain.com
+#
+#upload_config:
+#  artifacts_env:
+#    usr: artifacts_username
+#    password: artifacts_pwd
+#    logs_link: https://artifacts_env_link
+#    log_dir: log_dir
+#    env_profile: env_profile_dir
+#    suites: suites_dir
+#    testdata: test_data_dir
 

@@ -3,28 +3,166 @@ TestOthers#test06_test_list_multipart_uploads#2,list multipart uploads with KeyM
 'object_name_1':'obj-1.%s'%random_bucket_name(),
 'object_name_2':'obj-2.%s'%random_bucket_name()}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [200, 409]),
 (""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name_1""]}, [200, 409]),
-(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name_2""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""], ""KeyMarker"": self.variables[""object_name_1""]}",200,,"{'Bucket': self.variables['bucket_name'], 'KeyMarker': self.variables[""object_name_1""], 'UploadIdMarker': '', 'Prefix': '', 'Delimiter': '', 'MaxUploads': 1000, 'IsTruncated': False, 'Uploads': [{'UploadId': self.global_variables[self.variables['object_name_2']+'_upload_id'], 'Key': self.variables['object_name_2'], 'Initiated': datetime.datetime, 'StorageClass': 'STANDARD', 'Owner': {'DisplayName': self.get_user_info('group1:user1').get('user_name'), 'ID': self.get_user_info('group1:user1').get('user_id')}, 'Initiator': {'ID': self.get_user_info('group1:user1').get('user_id'), 'DisplayName': self.get_user_info('group1:user1').get('user_name')}}]}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name_2""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""], ""KeyMarker"": self.variables[""object_name_1""]}",200,,"{'Bucket': self.variables['bucket_name'], 'KeyMarker': self.variables[""object_name_1""], 'UploadIdMarker': '', 'Prefix': '', 'Delimiter': '', 'MaxUploads': 1000, 'IsTruncated': False, 'Uploads': [{'UploadId': self.global_variables[self.variables['object_name_2']+'_upload_id'], 'Key': self.variables['object_name_2'], 'Initiated': datetime.datetime, 'StorageClass': 'STANDARD', 'Owner': {'DisplayName': str, 'ID': str, 'Initiator': {'ID': str, 'DisplayName': str}}]}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
 TestOthers#test06_test_list_multipart_uploads#3,list multipart uploads with KeyMarker and UploadIdMarker,list multipart uploads|KeyMarker|UploadIdMarker,P0,"{'bucket_name': 'multipart-uploads%s'%random_bucket_name(),
 'object_name_1':'obj-1.%s'%random_bucket_name(),
 'object_name_2':'obj-2.%s'%random_bucket_name()}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [200, 409]),
 (""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name_1""]}, [200, 409]),
-(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name_2""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""], ""KeyMarker"": self.variables[""object_name_1""], ""UploadIdMarker"": self.global_variables[self.variables['object_name_1']+'_upload_id']}",200,,"{'Bucket': self.variables['bucket_name'], 'KeyMarker': self.variables[""object_name_1""], 'UploadIdMarker': self.global_variables[self.variables['object_name_1']+'_upload_id'], 'Prefix': '', 'Delimiter': '', 'MaxUploads': 1000, 'IsTruncated': False, 'Uploads': [{'UploadId': self.global_variables[self.variables['object_name_2']+'_upload_id'], 'Key': self.variables['object_name_2'], 'Initiated': datetime.datetime, 'StorageClass': 'STANDARD', 'Owner': {'DisplayName': self.get_user_info('group1:user1').get('user_name'), 'ID': self.get_user_info('group1:user1').get('user_id')}, 'Initiator': {'ID': self.get_user_info('group1:user1').get('user_id'), 'DisplayName': self.get_user_info('group1:user1').get('user_name')}}]}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name_2""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""], ""KeyMarker"": self.variables[""object_name_1""], ""UploadIdMarker"": self.global_variables[self.variables['object_name_1']+'_upload_id']}",200,,"{'Bucket': self.variables['bucket_name'], 'KeyMarker': self.variables[""object_name_1""], 'UploadIdMarker': self.global_variables[self.variables['object_name_1']+'_upload_id'], 'Prefix': '', 'Delimiter': '', 'MaxUploads': 1000, 'IsTruncated': False, 'Uploads': [{'UploadId': self.global_variables[self.variables['object_name_2']+'_upload_id'], 'Key': self.variables['object_name_2'], 'Initiated': datetime.datetime, 'StorageClass': 'STANDARD', 'Owner': {'DisplayName': str, 'ID': str}, 'Initiator': {'ID': str, 'DisplayName': str}}]}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
 TestOthers#test06_test_list_multipart_uploads#4,list multipart uploads of a bucket,list multipart uploads|Bucket,P0,"{'bucket_name': 'multipart-uploads%s'%random_bucket_name(),
 'object_name':'list-multipart-uploads%s'%random_bucket_name()}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [200, 409]),
-(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""]}",200,,"{'Bucket': self.variables['bucket_name'], 'KeyMarker': '', 'UploadIdMarker': '', 'Prefix': '', 'Delimiter': '', 'MaxUploads': 1000, 'IsTruncated': False, 'Uploads': [{'UploadId': self.global_variables[self.variables['object_name']+'_upload_id'], 'Key': self.variables['object_name'], 'Initiated': datetime.datetime, 'StorageClass': 'STANDARD', 'Owner': {'DisplayName': self.get_user_info('group1:user1').get('user_name'), 'ID': self.get_user_info('group1:user1').get('user_id')}, 'Initiator': {'ID': self.get_user_info('group1:user1').get('user_id'), 'DisplayName': self.get_user_info('group1:user1').get('user_name')}}]}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""]}",200,,"{'Bucket': self.variables['bucket_name'], 'KeyMarker': '', 'UploadIdMarker': '', 'Prefix': '', 'Delimiter': '', 'MaxUploads': 1000, 'IsTruncated': False, 'Uploads': [{'UploadId': self.global_variables[self.variables['object_name']+'_upload_id'], 'Key': self.variables['object_name'], 'Initiated': datetime.datetime, 'StorageClass': 'STANDARD', 'Owner': {'DisplayName': str, 'ID': str}, 'Initiator': {'ID': str, 'DisplayName': str}}]}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
 TestOthers#test06_test_list_multipart_uploads#5,list multipart uploads with Delimiter,list multipart uploads|Delimiter,P0,"{'bucket_name': 'multipart-uploads%s'%random_bucket_name(),
 'object_name':'list-multipart-uploads%s'%random_bucket_name()}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [200, 409]),
-(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""],  ""Delimiter"": ""/""}",200,,"{'Bucket': self.variables['bucket_name'], 'KeyMarker': '', 'UploadIdMarker': '', 'Prefix': '', 'Delimiter': '/', 'MaxUploads': 1000, 'IsTruncated': False, 'Uploads': [{'UploadId': self.global_variables[self.variables['object_name']+'_upload_id'], 'Key': self.variables['object_name'], 'Initiated': datetime.datetime, 'StorageClass': 'STANDARD', 'Owner': {'DisplayName': self.get_user_info('group1:user1').get('user_name'), 'ID': self.get_user_info('group1:user1').get('user_id')}, 'Initiator': {'ID': self.get_user_info('group1:user1').get('user_id'), 'DisplayName': self.get_user_info('group1:user1').get('user_name')}}]}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""],  ""Delimiter"": ""/""}",200,,"{'Bucket': self.variables['bucket_name'], 'KeyMarker': '', 'UploadIdMarker': '', 'Prefix': '', 'Delimiter': '/', 'MaxUploads': 1000, 'IsTruncated': False, 'Uploads': [{'UploadId': self.global_variables[self.variables['object_name']+'_upload_id'], 'Key': self.variables['object_name'], 'Initiated': datetime.datetime, 'StorageClass': 'STANDARD', 'Owner': {'DisplayName': str, 'ID': str}, 'Initiator': {'ID': str, 'DisplayName': str}}]}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
 TestOthers#test06_test_list_multipart_uploads#6,list multipart uploads with MaxUploads,list multipart uploads|MaxUploads,P0,"{'bucket_name': 'multipart-uploads%s'%random_bucket_name(),
 'object_name_1':'obj-1.%s'%random_bucket_name(),
 'object_name_2':'obj-2.%s'%random_bucket_name()}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [200, 409]),
 (""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name_1""]}, [200, 409]),
-(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name_2""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""],  ""MaxUploads"": 1}",200,,"{'Bucket': self.variables['bucket_name'], 'KeyMarker': '', 'UploadIdMarker': '', 'Prefix': '', 'Delimiter': '', 'MaxUploads': 1, 'IsTruncated': True, 'Uploads': [{'UploadId': self.global_variables[self.variables['object_name_1']+'_upload_id'], 'Key': self.variables['object_name_1'], 'Initiated': datetime.datetime, 'StorageClass': 'STANDARD', 'Owner': {'DisplayName': self.get_user_info('group1:user1').get('user_name'), 'ID': self.get_user_info('group1:user1').get('user_id')}, 'Initiator': {'ID': self.get_user_info('group1:user1').get('user_id'), 'DisplayName': self.get_user_info('group1:user1').get('user_name')}}]}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name_2""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""],  ""MaxUploads"": 1}",200,,"{'Bucket': self.variables['bucket_name'], 'KeyMarker': '', 'UploadIdMarker': '', 'Prefix': '', 'Delimiter': '', 'MaxUploads': 1, 'IsTruncated': True, 'Uploads': [{'UploadId': self.global_variables[self.variables['object_name_1']+'_upload_id'], 'Key': self.variables['object_name_1'], 'Initiated': datetime.datetime, 'StorageClass': 'STANDARD', 'Owner': {'DisplayName': str, 'ID': str}, 'Initiator': {'ID': str, 'DisplayName': str}}]}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
 TestOthers#test06_test_list_multipart_uploads#7,list multipart uploads with Prefix,list multipart uploads|Prefix,P0,"{'bucket_name': 'multipart-uploads%s'%random_bucket_name(),
 'object_name_1':'obj-1.%s'%random_bucket_name(),
 'object_name_2':'obj-2.%s'%random_bucket_name()}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [200, 409]),
 (""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name_1""]}, [200, 409]),
-(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name_2""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""],  ""Prefix"": ""obj-2""}",200,,"{'Bucket': self.variables['bucket_name'], 'KeyMarker': '', 'UploadIdMarker': '', 'Prefix': 'obj-2', 'Delimiter': '', 'MaxUploads': 1000, 'IsTruncated': False, 'Uploads': [{'UploadId': self.global_variables[self.variables['object_name_2']+'_upload_id'], 'Key': self.variables['object_name_2'], 'Initiated': datetime.datetime, 'StorageClass': 'STANDARD', 'Owner': {'DisplayName': self.get_user_info('group1:user1').get('user_name'), 'ID': self.get_user_info('group1:user1').get('user_id')}, 'Initiator': {'ID': self.get_user_info('group1:user1').get('user_id'), 'DisplayName': self.get_user_info('group1:user1').get('user_name')}}]}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name_2""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""],  ""Prefix"": ""obj-2""}",200,,"{'Bucket': self.variables['bucket_name'], 'KeyMarker': '', 'UploadIdMarker': '', 'Prefix': 'obj-2', 'Delimiter': '', 'MaxUploads': 1000, 'IsTruncated': False, 'Uploads': [{'UploadId': self.global_variables[self.variables['object_name_2']+'_upload_id'], 'Key': self.variables['object_name_2'], 'Initiated': datetime.datetime, 'StorageClass': 'STANDARD', 'Owner': {'DisplayName': str, 'ID': str}, 'Initiator': {'ID': str, 'DisplayName': str}}]}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
 TestOthers#test06_test_list_multipart_uploads#8,list multipart uploads|EncodingType,list multipart uploads|EncodingType,P0,"{'bucket_name': 'multipart-uploads%s'%random_bucket_name(),
 'object_name':'list-multipart-uploads%s'%random_bucket_name()}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [200, 409]),
-(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""], ""EncodingType"": ""url""}",200,,"{'Bucket': self.variables['bucket_name'], 'KeyMarker': '', 'UploadIdMarker': '', 'Prefix': '', 'Delimiter': '', 'MaxUploads': 1000, 'IsTruncated': False, 'Uploads': [{'UploadId': self.global_variables[self.variables['object_name']+'_upload_id'], 'Key': self.variables['object_name'], 'Initiated': datetime.datetime, 'StorageClass': 'STANDARD', 'Owner': {'DisplayName': self.get_user_info('group1:user1').get('user_name'), 'ID': self.get_user_info('group1:user1').get('user_id')}, 'Initiator': {'ID': self.get_user_info('group1:user1').get('user_id'), 'DisplayName': self.get_user_info('group1:user1').get('user_name')}}]}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": self.variables[""object_name""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""], ""EncodingType"": ""url""}",200,,"{'Bucket': self.variables['bucket_name'], 'KeyMarker': '', 'UploadIdMarker': '', 'Prefix': '', 'Delimiter': '', 'MaxUploads': 1000, 'IsTruncated': False, 'Uploads': [{'UploadId': self.global_variables[self.variables['object_name']+'_upload_id'], 'Key': self.variables['object_name'], 'Initiated': datetime.datetime, 'StorageClass': 'STANDARD', 'Owner': {'DisplayName': str, 'ID': str}, 'Initiator': {'ID': str, 'DisplayName': str}}]}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
+TestOthers#test06_test_list_multipart_uploads#9,list multipart uploads with KeyMarker - path-obj,list multipart uploads|KeyMarker,P0,"{'bucket_name': 'multipart-uploads%s'%random_bucket_name(),
+'object_name_1':'obj-1.%s'%random_bucket_name(),
+'object_name_2':'obj-2.%s'%random_bucket_name()}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": ""sub1/sub2/""+self.variables[""object_name_1""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": ""sub1/"" + self.variables[""object_name_2""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""], ""KeyMarker"": ""sub1/sub2/"" + self.variables[""object_name_1""]}",200,,"{'Bucket':self.variables['bucket_name'],'KeyMarker':'sub1/sub2/'+self.variables[""object_name_1""],'UploadIdMarker':'','Prefix':'','Delimiter':'','MaxUploads':1000,'IsTruncated':False}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
+TestOthers#test06_test_list_multipart_uploads#10,list multipart uploads with KeyMarker - path-obj -multi,list multipart uploads|KeyMarker,P0,"{'bucket_name': 'multipart-uploads%s'%random_bucket_name(),
+'object_name_1':'obj-1.%s'%random_bucket_name(),
+'object_name_2':'obj-2.%s'%random_bucket_name()}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": ""sub1/sub2/""+self.variables[""object_name_1""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": ""sub1/"" + self.variables[""object_name_2""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""], ""KeyMarker"": ""sub1/"" + self.variables[""object_name_2""]}",200,,"{'Bucket':self.variables['bucket_name'],'KeyMarker':'sub1/'+self.variables[""object_name_2""],'UploadIdMarker':'','Prefix':'','Delimiter':'','MaxUploads':1000,'IsTruncated':False, 'Uploads': [{'UploadId': self.global_variables['sub1/sub2/' + self.variables['object_name_1']+'_upload_id'], 'Key': 'sub1/sub2/' + self.variables['object_name_1'], 'Initiated': datetime.datetime, 'StorageClass': 'STANDARD', 'Owner': {'DisplayName': str, 'ID': str}, 'Initiator': {'ID': str, 'DisplayName': str}}]}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
+TestOthers#test06_test_list_multipart_uploads#11,list multipart uploads with KeyMarker and UploadIdMarker - path-obj,list multipart uploads|KeyMarker|UploadIdMarker,P0,"{'bucket_name': 'multipart-uploads%s'%random_bucket_name(),
+'object_name_1':'obj-1.%s'%random_bucket_name(),
+'object_name_2':'obj-2.%s'%random_bucket_name()}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": ""sub1/sub2/""+self.variables[""object_name_1""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": ""sub1/"" + self.variables[""object_name_2""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""], ""KeyMarker"": ""sub1/sub2/%s""%self.variables[""object_name_1""], ""UploadIdMarker"":self.global_variables['sub1/sub2/'+self.variables['object_name_1']+'_upload_id']}",200,,"{'Bucket':self.variables['bucket_name'],'KeyMarker':'sub1/sub2/'+self.variables[""object_name_1""],'UploadIdMarker':self.global_variables['sub1/sub2/'+self.variables['object_name_1']+'_upload_id'],'Prefix':'','Delimiter':'','MaxUploads':1000,'IsTruncated':False}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
+TestOthers#test06_test_list_multipart_uploads#12,list multipart uploads of a bucket - path-obj,list multipart uploads|Bucket,P0,"{'bucket_name': 'multipart-uploads%s'%random_bucket_name(),
+'object_name':'list-multipart-uploads%s'%random_bucket_name()}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": ""sub1/sub2/""+self.variables[""object_name""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""]}",200,,"{
+	'Bucket': self.variables[""bucket_name""],
+	'KeyMarker': '',
+	'UploadIdMarker': '',
+	'NextKeyMarker': '',
+	'Prefix': '',
+	'Delimiter': '',
+	'NextUploadIdMarker': self.global_variables['sub1/sub2/'+self.variables['object_name']+'_upload_id'],
+	'MaxUploads': 1000,
+	'IsTruncated': False,
+	'Uploads': [{
+		'UploadId': self.global_variables['sub1/sub2/'+self.variables['object_name']+'_upload_id'],
+		'Key': 'sub1/sub2/%s'%self.variables[""object_name""],
+		'Initiated': datetime.datetime(2021, 3, 5, 6, 51, 40, tzinfo = tzutc()),
+		'StorageClass': 'STANDARD',
+		'Owner': {
+			'DisplayName': str,
+			'ID': str
+		},
+		'Initiator': {
+			'ID': str,
+			'DisplayName': str
+		}
+	}]
+}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
+TestOthers#test06_test_list_multipart_uploads#13,list multipart uploads with Delimiter - path-obj,list multipart uploads|Delimiter,P0,"{'bucket_name': 'multipart-uploads%s'%random_bucket_name(),
+'object_name':'list-multipart-uploads%s'%random_bucket_name()}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": ""sub1/sub2/""+self.variables[""object_name""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""],  ""Delimiter"": ""/""}",200,,"{
+	'Bucket': self.variables[""bucket_name""],
+	'KeyMarker': '',
+	'UploadIdMarker': '','Prefix': '',
+	'Delimiter': '/',
+	'MaxUploads': 1000,
+	'IsTruncated': False,
+	'CommonPrefixes': [{'Prefix': 'sub1/'}]
+}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
+TestOthers#test06_test_list_multipart_uploads#14,list multipart uploads with MaxUploads - path-obj,list multipart uploads|MaxUploads,P0,"{'bucket_name': 'multipart-uploads%s'%random_bucket_name(),
+'object_name_1':'obj-1.%s'%random_bucket_name(),
+'object_name_2':'obj-2.%s'%random_bucket_name()}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": ""sub1/sub2/""+self.variables[""object_name_1""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": ""sub1/"" + self.variables[""object_name_2""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""],  ""MaxUploads"": 1}",200,,"""{
+	'Bucket': self.variables[""bucket_name""],
+	'KeyMarker': '',
+	'UploadIdMarker': '',
+	'NextKeyMarker': 'sub1/%s'%self.variables[""object_name_2""],
+	'Prefix': '',
+	'Delimiter': '',
+	'NextUploadIdMarker': self.global_variables['sub1/'+self.variables['object_name_2']+'_upload_id'],
+	'MaxUploads': 1,
+	'IsTruncated': True,
+	'Uploads': [{
+		'UploadId': self.global_variables['sub1/'+self.variables['object_name_2']+'_upload_id'],
+		'Key': 'sub1/%s'%self.variables[""object_name_2""],
+		'Initiated': datetime.datetime(2021, 3, 5, 6, 51, 40, tzinfo = tzutc()),
+		'StorageClass': 'STANDARD',
+		'Owner': {
+			'DisplayName': str,
+			'ID': str
+		},
+		'Initiator': {
+			'ID': str,
+			'DisplayName': str
+		}
+	}]
+}""",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
+TestOthers#test06_test_list_multipart_uploads#15,list multipart uploads with Prefix - path-obj,list multipart uploads|Prefix,P0,"{'bucket_name': 'multipart-uploads%s'%random_bucket_name(),
+'object_name_1':'obj-1.%s'%random_bucket_name(),
+'object_name_2':'obj-2.%s'%random_bucket_name()}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": ""sub1/sub2/""+self.variables[""object_name_1""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": ""sub1/"" + self.variables[""object_name_2""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""],  ""Prefix"": ""sub1/""}",200,,"""{
+	'Bucket': self.variables[""bucket_name""],
+	'KeyMarker': '',
+	'UploadIdMarker': '',
+	'NextKeyMarker': 'sub1/%s'%self.variables[""object_name_2""],
+	'Prefix': 'sub1/',
+	'Delimiter': '',
+	'NextUploadIdMarker': self.global_variables['sub1/'+self.variables['object_name_2']+'_upload_id'],
+	'MaxUploads': 1000,
+	'IsTruncated': False,
+	'Uploads': [{
+		'UploadId': self.global_variables['sub1/'+self.variables['object_name_2']+'_upload_id'],
+		'Key': 'sub1/%s'%self.variables[""object_name_2""],
+		'Initiated': datetime.datetime(2021, 3, 5, 6, 51, 40, tzinfo = tzutc()),
+		'StorageClass': 'STANDARD',
+		'Owner': {
+			'DisplayName': str,
+			'ID': str
+		},
+		'Initiator': {
+			'ID': str,
+			'DisplayName': str
+		}
+	}]
+}""",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,
+TestOthers#test06_test_list_multipart_uploads#16,list multipart uploads|EncodingType - path-obj,list multipart uploads|EncodingType,P0,"{'bucket_name': 'multipart-uploads%s'%random_bucket_name(),
+'object_name':'list-multipart-uploads%s'%random_bucket_name()}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""create_multipart_upload"", {""Bucket"": self.variables[""bucket_name""], ""Key"": ""sub1/sub2/""+self.variables[""object_name""]}, [200, 409])]",group1:user1,S3CompatibleAPI,,list_multipart_uploads,"{""Bucket"": self.variables[""bucket_name""], ""EncodingType"": ""url""}",200,,"""{
+	'Bucket': self.variables[""bucket_name""],
+	'KeyMarker': '',
+	'UploadIdMarker': '',
+	'NextKeyMarker': 'sub1/sub2/%s'%self.variables[""object_name_1""],
+	'Prefix': 'sub1/',
+	'Delimiter': '',
+	'NextUploadIdMarker': self.global_variables['sub1/sub2/'+self.variables['object_name_1']+'_upload_id'],
+	'MaxUploads': 1000,
+	'IsTruncated': False,
+	'Uploads': [{
+		'UploadId': self.global_variables['sub1/sub2/'+self.variables['object_name_1']+'_upload_id'],
+		'Key': 'sub1/sub2/%s'%self.variables[""object_name_1""],
+		'Initiated': datetime.datetime(2021, 3, 5, 6, 51, 40, tzinfo = tzutc()),
+		'StorageClass': 'STANDARD',
+		'Owner': {
+			'DisplayName': str,
+			'ID': str
+		},
+		'Initiator': {
+			'ID': str,
+			'DisplayName': str
+		}
+	}]
+}""",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""bucket_name""]}, [204, 404])]",,

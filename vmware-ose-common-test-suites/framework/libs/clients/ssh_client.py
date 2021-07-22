@@ -59,9 +59,4 @@ class SSHClient:
 
 
 if __name__ == '__main__':
-    ssh_c = SSHClient('10.110.124.123', 22, 'root', 'ca$hc0w')
-    _, _, err = ssh_c.exec_cmd('voss_cli --version')
-
-    cmds = ['voss_cli args list', 'voss_cli cert show']
-#    _, _, err = ssh_c.exec_cmds(cmds)
     pass

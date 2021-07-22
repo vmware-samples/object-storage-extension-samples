@@ -65,12 +65,7 @@ class Base(unittest.TestCase):
             client_type = testdata.get(
                 CSVColumns.ClientType.value) if testdata.get(CSVColumns.ClientType.value) else client_type
             if not client_type:
-                client_type = 'S3CompatibleAPI'  # TODO: to be enhanced to support different clients
-
-            client_instance = self.get_api_host_instance(
-                usr_role=testdata.get(CSVColumns.Role.value),
-                api_host=client_type,
-                auth_settings=testdata.get(CSVColumns.AuthSettings.value))
+                client_type = 'S3CompatibleAPI'
 
             action = testdata.get(
                 CSVColumns.Action.value) if testdata.get(CSVColumns.Action.value) else action
@@ -80,16 +75,22 @@ class Base(unittest.TestCase):
                 testdata_key=CSVColumns.Parameter.value,
                 default_when_failure={})
 
+            client_instance = self.get_api_host_instance(
+                usr_role=testdata.get(CSVColumns.Role.value),
+                api_host=client_type,
+                auth_settings=testdata.get(CSVColumns.AuthSettings.value),
+            )
+
             self.logger.info(ansi_info(
                 "Operator: %s (auth settings: %s)" % (testdata.get(CSVColumns.Role.value),
                                                       testdata.get(CSVColumns.AuthSettings.value))))
 
             actual_response = self.func_hook(client_instance, action, **method_parameters)
 
-            if action in ['create_multipart_upload', 'put_object', 'list_object_versions']:
-                self.global_variables.update(new_passdown_variables(actual_response, self.global_variables,
-                                                                    self.variables, action,
-                                                                    parameters=method_parameters))
+            self.global_variables = new_passdown_variables(
+                actual_response, self.global_variables,
+                self.variables, action,
+                parameters=method_parameters)
 
             self.logger.info(ansi_title("Step3: Case Validation"))
             # self.generate_variables('ResponseVariables')
@@ -210,7 +211,9 @@ class Base(unittest.TestCase):
                     step_cfg = dict(zip(keys, others))
                     variables = step_cfg.get('variables')
 
-                    client_instance = self.get_api_host_instance(role, client_type)
+                    client_instance = self.get_api_host_instance(usr_role=role,
+                                                                 api_host=client_type,
+                                                                 auth_settings=auth_settings)
 
                     if auth_settings is None:
                         self.logger.info(ansi_info("%s Step %s (%s):" % (execution_type, step_idx, role)))
@@ -224,10 +227,10 @@ class Base(unittest.TestCase):
                     actual_response = self.func_hook(client_instance, action, **parameters)
 
                     if execution_type == "PreCondition":
-                        if action in ['create_multipart_upload', 'put_object', 'list_object_versions']:
-                            self.global_variables.update(
-                                new_passdown_variables(actual_response, self.global_variables,
-                                                       self.variables, action, parameters))
+                        self.global_variables = new_passdown_variables(
+                            actual_response, self.global_variables,
+                            self.variables, action, parameters)
+
                     # ignore non-dict variables
                     if isinstance(variables, dict) and variables:
                         # save variables from response for later use
@@ -334,6 +337,7 @@ class Base(unittest.TestCase):
         return parsed_rslt
 
     def get_api_host_instance(self, usr_role='group1:user1', api_host='S3CompatibleAPI', auth_settings=None):
+
         # group1:user1
         new_k = usr_role + '@' + api_host
         if new_k in self.client_instances:
@@ -342,15 +346,24 @@ class Base(unittest.TestCase):
         _group = usr_role.split(':')[0]
         _user = usr_role.split(':')[1]
 
-        if api_host in ['S3CompatibleAPI']:
-            s3_api = get_boto_client(self.cfg_profile, group=_group, user=_user)
+        s3_api = get_boto_client(self.cfg_profile, group=_group, user=_user,
+                                 api_host=api_host)
 
-            self.client_instances[new_k] = s3_api
-            self.logger.debug("Client info: %s" % new_k)
-            return self.client_instances[new_k]
+        self.client_instances[new_k] = s3_api
+        self.logger.debug("Client info: %s" % new_k)
+        return self.client_instances[new_k]
 
+    def generate_object_name(self, length=1024, path_obj=False):
+        if not path_obj:
+            return random_string(length=length)
         else:
-            pass
+            prefix = ''
+            path_obj = 'b'
+            while len(path_obj) < length:
+                prefix += 'a/'
+                path_obj = prefix + 'b'
+
+            return path_obj[2:] if len(path_obj) > 3 else path_obj
 
     def tearDown(self):
         self.logger.info(ansi_title("Step5: Case Cleanup"))

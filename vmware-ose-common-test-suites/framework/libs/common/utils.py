@@ -218,43 +218,7 @@ def get_test_report_title():
     return str('s3-test') + '@' + current_time
 
 
-def get_api_host_instance(self, usr_role='group1:user1', api_host='S3CompatibleAPI', auth_settings=None):
-    # group1:user1
-    new_k = usr_role + '@' + api_host
-
-    _group = usr_role.split(':')[0]
-    _user = usr_role.split(':')[1]
-
-    if api_host in ['S3CompatibleAPI']:
-        if new_k not in self.client_instances:
-            s3_kwargs = dict()
-
-            s3_kwargs.update({"aws_access_key_id": self.cfg_profile[
-                _group][_user]['main_credential']['access_key'],
-                              "aws_secret_access_key": self.cfg_profile[
-                                  _group][_user]['main_credential']['secret_key'],
-                              "verify": False,
-                              "region_name": self.cfg_profile.get('storage').get('region')})
-
-            if self.cfg_profile.get('virtual_host_style'):
-                s3_kwargs["config"] = {"s3": {"addressing_style": "virtual"}}
-
-            s3_kwargs["endpoint_url"] = self.cfg_profile.get('ose_url')
-
-            if self.cfg_profile.get('vendor'):
-                s3_kwargs.update({"endpoint_url": self.cfg_profile.get('vendor_s3_endpoint'),
-                                  "region_name": self.cfg_profile.get('vendor_region')})
-
-            s3_api = globals()[api_host](**s3_kwargs)
-            self.client_instances[new_k] = s3_api
-            self.logger.debug("Client info: %s" % new_k)
-        return self.client_instances[new_k]
-
-    else:
-        pass
-
-
-def get_boto_client(config_profile, group='group1', user='user1'):
+def get_boto_client(config_profile, group='group1', user='user1', api_host='S3CompatibleAPI'):
     s3_kwargs = dict()
 
     s3_kwargs.update({
@@ -273,6 +237,11 @@ def get_boto_client(config_profile, group='group1', user='user1'):
     if config_profile.get('vendor'):
         s3_kwargs.update({"endpoint_url": config_profile.get('vendor_s3_endpoint'),
                           "region_name": config_profile.get('vendor_region')})
+
+    # test_head_object_prov
+    if api_host == 'S3ExtendedAPI_VendorEndpoint':
+        s3_kwargs.update({"endpoint_url": config_profile.get('vendor_s3_endpoint'),
+                          "region_name": config_profile.get('vendor_region')})
     return S3CompatibleAPI(**s3_kwargs)
 
 
@@ -283,7 +252,6 @@ def remove_test_buckets(config_profile):
     if isinstance(buckets, list) and len(buckets) > 0:
         for bkt_item in buckets:
             if test_bucket_prefix in bkt_item.get('Name'):
-                print(bkt_item)
                 boto3_client.force_delete_bucket(Bucket=bkt_item.get('Name'))
 
     print("Successfully cleaned up the test buckets.")
@@ -328,14 +296,19 @@ def handle_ose_arguments(ose_args):
 
 def new_passdown_variables(actual_response, global_variables=None,
                            variables=None, action=None, parameters=None):
-    if action == "create_multipart_upload":
+
+    if action == "get_object":
+        obj_last_modified = actual_response.get('LastModified')
+        global_variables['obj_last_modified'] = obj_last_modified
+
+    elif action == "create_multipart_upload":
         upload_id = actual_response.get('UploadId')
         if upload_id:
             obj_name = actual_response.get('Key')
             upload_id_index = obj_name + '_upload_id'
             global_variables[upload_id_index] = upload_id
 
-    if action == "put_object":
+    elif action == "put_object":
         if variables is not None and 'object_name' in variables:
             obj_name = variables['object_name']
         else:
@@ -355,7 +328,7 @@ def new_passdown_variables(actual_response, global_variables=None,
             else:
                 global_variables[key_versions_index] = [version_id]
 
-    if action == "list_object_versions":
+    elif action == "list_object_versions":
         if variables is not None and 'object_name' in variables:
             obj_name = variables['object_name']
         else:
@@ -382,6 +355,8 @@ def new_passdown_variables(actual_response, global_variables=None,
                         global_variables[key_deleted_index].append(deleted_version_id)
                     else:
                         global_variables[key_deleted_index] = [deleted_version_id]
+    else:
+        return global_variables
 
     return global_variables
 
