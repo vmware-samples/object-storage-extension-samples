@@ -54,7 +54,6 @@ class S3CompatibleAPI(object):
                 self.__client = boto3.client('s3', **params)
             except:
                 self.__client = None
-
         '''
         Unregister following handlers for testing purpose
         '''
@@ -93,10 +92,19 @@ class S3CompatibleAPI(object):
         list_objects_versions_actual_response.should.have.key("ResponseMetadata").have.key('HTTPStatusCode').within(
             [200, 404])
 
-        # check if the bucket's object_lock is enabled
+        # check if the bucket has object lock enabled
         object_lock_enabled = False
+        try:
+            get_object_lock_response = self.get_object_lock_configuration(**req_data)
+        except botocore.exceptions.ClientError as e:
+            get_object_lock_response = e.response
 
-        if list_objects_versions_actual_response["ResponseMetadata"]["HTTPStatusCode"] == 200:
+        if get_object_lock_response["ResponseMetadata"]["HTTPStatusCode"] == 200:
+            #
+            if get_object_lock_response["ObjectLockConfiguration"]['ObjectLockEnabled'] == 'Enabled':
+                object_lock_enabled = True
+
+        while list_objects_versions_actual_response["ResponseMetadata"]["HTTPStatusCode"] == 200:
             all_keys_to_delete = []
             if 'Versions' in list_objects_versions_actual_response and isinstance(
                     list_objects_versions_actual_response.get('Versions'), list):
@@ -111,13 +119,36 @@ class S3CompatibleAPI(object):
             if not all_keys_to_delete:
                 return list_objects_versions_actual_response
 
-            # TODO:
             if object_lock_enabled:
-                # delete retention
+                for _item in all_keys_to_delete:
+                    req_data.update({'Key': _item.get('Key'), 'VersionId': _item.get('VersionId')})
+                    try:
+                        get_object_retention = self.get_object_retention(**req_data)
+                    except botocore.exceptions.ClientError as e:
+                        get_object_retention = e.response
 
-                # delete legal hold
-                pass
+                    if get_object_retention['ResponseMetadata'] == 404:
+                        continue
 
+                    if 'Retention' in get_object_retention:
+                        if 'COMPLIANCE' == \
+                                get_object_retention['Retention']['Mode']:
+                            print('The object is with object-lock COMPLIANCE mode. It can NOT be removed.')
+                            return
+                        else:
+                            # Update the Object lock with no retention
+                            req_data.update({'Retention': {}, 'BypassGovernanceRetention': True})
+                            self.put_object_retention(**req_data)
+                            req_data.pop('Retention')
+                            req_data.pop('BypassGovernanceRetention')
+
+                    # remove legal hold
+                    req_data.update({'LegalHold': {'Status': 'OFF'}})
+                    self.put_object_legal_hold(**req_data)
+                    req_data.pop('LegalHold')
+
+                req_data.pop('Key', '')
+                req_data.pop('VersionId', '')
             try:
                 delete_objects_actual_response = self.delete_objects(
                     Delete={"Objects": all_keys_to_delete}, **req_data)
@@ -126,6 +157,7 @@ class S3CompatibleAPI(object):
 
             delete_objects_actual_response.should.have.key("ResponseMetadata").have.key('HTTPStatusCode').within(
                 [200, 404])
+
             if delete_objects_actual_response["ResponseMetadata"]["HTTPStatusCode"] == 200:
                 delete_objects_actual_response.shouldnt.have.key('Error')
 
@@ -136,6 +168,7 @@ class S3CompatibleAPI(object):
                 list_objects_versions_actual_response = e.response
                 list_objects_versions_actual_response.should.have.key("ResponseMetadata").have.key(
                     'HTTPStatusCode').within([200, 404])
+
             # contents = list_objects_versions_actual_response.get("Contents")
         return delete_objects_actual_response or list_objects_versions_actual_response
 
@@ -175,13 +208,18 @@ class S3CompatibleAPI(object):
         res = None
         try:
             res = self.empty_bucket(**req_data)
+            # if former_response["ResponseMetadata"]["HTTPStatusCode"] == 404:
+            #     return former_response
+            # else:
         except botocore.exceptions.ClientError as e:
             print(e.response)
+
         try:
             res = self.delete_bucket(**req_data)
         except botocore.exceptions.ClientError as e:
             if 'Error' in e.response and 'Code' in e.response.get('Error'):
-                print('Failed to remove the bucket due to : ' + e.response.get('Error').get('Code'))
+                print('Fails to remove bucket due to: ' + e.response.get('Error').get('Code'))
+
         return res
 
     def empty_multipart_uploads(self, **req_data):
@@ -537,6 +575,5 @@ class S3CompatibleAPI(object):
 
 
 if __name__ == "__main__":
-
     pass
 

@@ -1,5 +1,12 @@
 TCID,CaseTitle,Catalog,Priority,Variables,PreCondition,Role,ClientType,AuthSettings,Action,Parameter,ExpectResponseCode,ExpectResponseHeader,ExpectResponseBody,ExpectResponseBodySchema,PostValidation,Cleanup,Description,Comment
-TestBucket#test22_test_get_bucket_logging#2,get bucket logging ,get bucket logging|Bucket,P1,"{""source_bucket_name"":""logging-src-tu2-read.%s""%random_bucket_name(),
+TestBucket#test22_test_get_bucket_logging#2,get bucket logging ,get bucket logging|Bucket,P0,"{""source_bucket_name"":""logging-src-tu2-read.%s""%random_bucket_name(),
+""target_bucket_name"":""logging-tgt1.%s"" %random_bucket_name(),
+""target_prefix"": ""tu2-read/""}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"":self.variables[""source_bucket_name""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"":self.variables[""target_bucket_name""]}, [200, 409]),
+(""group1:user1"", ""S3CompatibleAPI"", ""put_bucket_acl"", {""Bucket"":self.variables[""target_bucket_name""], ""ACL"":""log-delivery-write""}, [200]),
+(""group1:user1"", ""S3CompatibleAPI"", ""put_bucket_logging"", {""Bucket"":self.variables[""source_bucket_name""],""BucketLoggingStatus"":{""LoggingEnabled"":{""TargetBucket"":self.variables[""target_bucket_name""], ""TargetPrefix"":self.variables[""target_prefix""]}}}, [200])]",group1:user1,S3CompatibleAPI,,get_bucket_logging,"{'Bucket': self.variables[""source_bucket_name""]}",200,,"{'LoggingEnabled': {'TargetBucket': self.variables[""target_bucket_name""], 'TargetPrefix': 'tu2-read/'}}",,,"[(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""source_bucket_name""]}, [204, 404]),
+(""group1:user1"", ""S3CompatibleAPI"", ""force_delete_bucket"", {""Bucket"": self.variables[""target_bucket_name""]}, [204, 404])]",,
+TestBucket#test22_test_get_bucket_logging#3,get bucket logging ,get bucket logging|Bucket,P1,"{""source_bucket_name"":""logging-src-tu2-read.%s""%random_bucket_name(),
 ""target_bucket_name"":""logging-tgt1.%s"" %random_bucket_name(),
 ""target_prefix"": ""tu2-read/""}","[(""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"":self.variables[""source_bucket_name""]}, [200, 409]),
 (""group1:user1"", ""S3CompatibleAPI"", ""create_bucket"", {""Bucket"":self.variables[""target_bucket_name""]}, [200, 409]),

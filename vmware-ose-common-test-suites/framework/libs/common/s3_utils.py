@@ -307,7 +307,6 @@ def validate(actual, expected, dict_match='full', list_match='include', validati
     '''
 
     type_validation_fail_msg = 'Type validation fail'
-
     if isinstance(expected, type):
         with sure.ensure("{0}, actual: {1}, expected: {2}", type_validation_fail_msg, type(actual), expected):
             if expected == datetime.datetime and isinstance(actual, str):
@@ -347,8 +346,16 @@ def validate(actual, expected, dict_match='full', list_match='include', validati
         if isinstance(actual_value, bytes):
             actual_value = actual_value.decode("utf-8")
         actual_value.should.be.equal(expected)
-    elif isinstance(expected, str) and isinstance(actual, bytes):
-        actual.decode("utf-8").should.be.equal(expected)
+
+    elif isinstance(expected, str):
+        if isinstance(actual, bytes):
+            actual.decode("utf-8").should.be.equal(expected)
+        elif isinstance(actual, dict):
+            str(actual).should.match(expected, re.I)
+        elif isinstance(actual, str):
+            actual.should.be.equal(expected)
+        # else:
+        #     raise AssertionError("%s has No such match: %s" % (str(actual), expected))
     else:
         with sure.ensure("{0}, actual: {1}, expected: {2}", type_validation_fail_msg, actual, type(expected)):
             actual.should.be.a(type(expected))
@@ -470,7 +477,6 @@ def validate(actual, expected, dict_match='full', list_match='include', validati
             if os.environ.get('WORK_AROUND') == 'enabled' and isinstance(actual, str) and actual.startswith('@@'):
                 #  vip enabled
                 actual = actual.strip('@')
-
             actual.should.be.equal(expected)
 
 
