@@ -9,15 +9,15 @@ Required APIs are mandatory to make OSE work for the new Object Storage platform
 # Deveopment Kit
 
 To faciliate for your OSIS Adapter development, we provide a number of resources on Github.
-* [OSIS CEPH Reference Implementation](vmware-ose-ceph-ref-impl/) is an implementation of OSIS for CEPH.
-* [OSIS Stub](vmware-ose-osis-stub/) is a Java REST client stub of OSIS specification.
-* [OSIS Verifier](vmware-ose-osis-verifier/) is a tool to verify the readiness and compatibiity of the OSIS implementation.
+* [OSIS CEPH Reference Implementation](../vmware-ose-ceph-ref-impl/) is an implementation of OSIS for CEPH.
+* [OSIS Stub](../vmware-ose-osis-stub/) is a Java REST client stub of OSIS specification.
+* [OSIS Verifier](../vmware-ose-osis-verifier/) is a tool to verify the readiness and compatibiity of the OSIS implementation.
 
 # System Requirement 
 
 The OSIS Adapter needs to be developed as an API service available to VMware Cloud Director Object Storage Extension (OSE) server. You can implement the OSIS Adapter in any programming language and deployed to any server environment. The only requirement on the OSIS Adapter is the network connectivity. It should be deployed in an intranet that OSE server can connect to it, and it can connect to the storage platform.
 
-![OSIS Topology](assets/osis-topo.png?raw=true)
+![OSIS Topology](../assets/osis-topo.png?raw=true)
 
 ## Best Practice
 
@@ -31,4 +31,4 @@ If you install the OSIS Adapter in a standalone machine, below hardware configur
 
 As a best practice, the OSIS Adapter can be installed to the same node as OSE server, and share same PostgreSQL database server that OSE uses. In this way, the additional maintenance effort can be mostly reduced. 
 
-![OSIS Network](assets/osis-network.png?raw=true)
+![OSIS Network](../assets/osis-network.png?raw=true)
