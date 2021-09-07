@@ -9,7 +9,7 @@ Required APIs are mandatory to make OSE work for the new Object Storage platform
 # Deveopment Kit
 
 To faciliate for your OSIS Adapter development, we provide a number of resources on Github.
-* [OSIS CEPH Reference Implementation](../vmware-ose-ceph-ref-impl/) is an implementation of OSIS for CEPH.
+* [OSIS CEPH Reference Implementation](../vmware-ose-osis-ceph-ri/) is an implementation of OSIS for CEPH.
 * [OSIS Stub](../vmware-ose-osis-stub/) is a Java REST client stub of OSIS specification.
 * [OSIS Verifier](../vmware-ose-osis-verifier/) is a tool to verify the readiness and compatibiity of the OSIS implementation.
 
