@@ -282,8 +282,7 @@ Here is an example for S3 credential creation
 ```
 
 ## API Documentation
-[OSIS Specification in OpenAPI](http://sha1-data-dhcp12510.eng.vmware.com/ose/osis/)
-//TODO official link of OSIS Spec
+[OSIS Specification in OpenAPI](https://code.vmware.com/apis/1034)
 
 The API documentation provides details for each OSIS API. 
 Two of them need highlighting as they handle the difference of OSIS implementation and the storage platforms.
