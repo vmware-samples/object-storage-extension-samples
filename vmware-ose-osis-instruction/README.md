@@ -6,7 +6,7 @@ For a new OSE OSIS Adapter, you need to implement a set of OSIS APIs defined by 
 
 Required APIs are mandatory to make OSE work for the new Object Storage platform.
 
-# Deveopment Kit
+# Development Kit
 
 To faciliate for your OSIS Adapter development, we provide a number of resources on Github.
 * [OSIS CEPH Reference Implementation](../vmware-ose-osis-ceph-ri/) is an implementation of OSIS for CEPH.
