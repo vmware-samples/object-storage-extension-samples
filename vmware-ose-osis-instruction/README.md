@@ -6,6 +6,11 @@ For a new OSE OSIS Adapter, you need to implement a set of OSIS APIs defined by 
 
 Required APIs are mandatory to make OSE work for the new Object Storage platform.
 
+# Development Guide 
+
+[VMware Object Storage Interoperability
+Service - Development Guide](https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/docs/vmware-object-storage-interoperability-service-development-guide.pdf)
+
 # Development Kit
 
 To faciliate for your OSIS Adapter development, we provide a number of resources on Github.
