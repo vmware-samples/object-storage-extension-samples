@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 Please execute the command `python osis_verify.py` to verify OSIS required APIs:
 
-```python
+```bash
 python osis_verifier.py 
   ___  ____ ___ ____   __     __        _  __ _           
  / _ \/ ___|_ _/ ___|  \ \   / /__ _ __(_)/ _(_) ___ _ __ 
