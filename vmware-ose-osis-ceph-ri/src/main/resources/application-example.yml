@@ -10,8 +10,6 @@ osis:
       secret-key: c5XMURa3Eu3KGPvHDmwTw8GQSOzDujfmNA94tlPh
     s3:
       endpoint: http://ceph.osis.ose.vmware.com:31383
-      access-key: 094BC4MZSZMET634FXZ0
-      secret-key: Gpyohi7gTe0YriLNhURixitKoZ8IVAsCPrDDZxh6
     console:
       endpoint: https://dashboard.ceph.osis.ose.vmware.com:30610
   api:

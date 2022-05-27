@@ -10,8 +10,6 @@ osis:
       password:
     s3:
       endpoint:
-      access-key:
-      secret-key:
     console:
       endpoint:
   api:
