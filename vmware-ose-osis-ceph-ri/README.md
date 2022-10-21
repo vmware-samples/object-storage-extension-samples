@@ -85,16 +85,15 @@ In other words, OSE is only aware of OSIS data models, but not storage platform 
 
 #### OSIS TENANT and CEPH USER
 
-CEPH has no dedicted model fro tenant. OSIS combines Cloud Director tenant name and ID with double underscores as OSIS tenant ID. Then use `OSIS_TENANT.tenant_id` as both `CEPH_USER.tenant` and `CEPH_USER.user_id`.
+CEPH has no dedicted model fro tenant. OSIS combines Cloud Director tenant name and ID with double underscores as OSIS tenant ID. Then use `OSIS_TENANT.tenant_id` as both `CEPH_USER.tenant` and `CEPH_USER.user_id`. Such CEPH user represents a storage platform "tenant" which can be mapped with Cloud Director Org.
 
 | OSIS TENANT | CEPH USER |
 | ------ | ------ |
-| tenant_id | tenant, user_id |
-| active | suspended | 
-| cd_tenant_ids | display_name.cdtids | 
-| name | tenant | 
+| tenant_id | tenant<br />user_id |
+| active | suspended |
+| cd_tenant_ids | display_name.cdtids |
 
-Here is an example to create tenant.
+Here is the explanation of creating tenant via the OSIS RI project.
 
 1. OSIS RI gets request from OSE to create tenant; `uuid-1` is uuid of Cloud Director tenant.
    Here, the request from OSE is of OSIS tenant model. 
@@ -153,6 +152,41 @@ Here is an example to create tenant.
   ]
 }
 ```
+
+##### Impacts on Tenant Onboard 
+
+Now that CEPH user is used to represent a storage tenant, it is worth explaining how it works in two kinds of tenant onboard.
+
+**Tenant Default Onboard**
+
+In this style of tenant onboard, OSE is responsible to create a special user in CEPH RGW via OSIS adaptor.
+
+For example, there is a Cloud Director Org: `name = ACME` and `ID = 9bce3e30622a42ec8580b62e49116586`.
+
+By default, the OSIS RI project will construct OSIS tenant model then create a special user in CEPH RGW according to the mapping rule above.
+
+| OSIS TENANT                                        | CEPH USER                                                    |
+| -------------------------------------------------- | ------------------------------------------------------------ |
+| tenant_id = ACME__9bce3e30622a42ec8580b62e49116586 | tenant = ACME\_\_9bce3e30622a42ec8580b62e49116586 <br />user_id = ACME\_\_9bce3e30622a42ec8580b62e49116586 |
+| active = true                                      | suspended = false                                            |
+| cd_tenant_ids = [9bce3e30622a42ec8580b62e49116586] | display_name = cdtids::9bce3e30622a42ec8580b62e49116586      |
+
+**Tenant Onboard with Custom Storage Tenant**
+
+Compared with default onboard, it requires an existing tenant in storage platform, like CEPH. Instead of OSE, administrator should create such CEPH tenant (special user) in advance on CEPH Dashboard. Here are the steps to create OSIS tenant in CEPH 16.2.7.
+
+1. Login CEPH Dashboard
+2. Click `Object Gateway` item in left-side navigator 
+3. Click `Users` sub-item
+4. Click `Create` button
+5. In the page for user properties, specify the values:
+   1. User ID: `custom_tenant_1`
+   2. Tenant: `custom_tenant_1`
+   3. Full name: `cdtids::`
+6. Click `Create User` button to complete the creation
+
+With the special CEPH user created, Cloud Director provider administrator can find a new storage tenant `custom_tenant_1` in the dropdown list of Active Tenant page.
+
 
 #### OSIS USER and CEPH USER
 | OSIS USER | CEPH USER |
