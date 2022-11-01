@@ -108,6 +108,9 @@ public class CephOsisService implements OsisService {
             throw new BadRequestException(String.format("The tenant %s does not exist.", osisUser.getTenantId()));
         }
 
+        if (headUser(osisUser.getTenantId(), osisUser.getUserId())) {
+            return getUser(osisUser.getTenantId(), osisUser.getUserId());
+        }
 
         User user = ModelConverter.toCephUser(osisUser);
 
@@ -132,7 +135,6 @@ public class CephOsisService implements OsisService {
         String displayName = kvMap.get(OSIS_DISPLAY_NAME);
         String activeStr = kvMap.get(OSIS_ACTIVE);
 
-        validateOsisTenantId(tenantId);
 
         List<String> uids = rgwAdmin.listUser().stream()
                 .filter(uid -> uid.contains(DOLLAR)).collect(Collectors.toList());
@@ -187,7 +189,6 @@ public class CephOsisService implements OsisService {
         String activeStr = kvMap.get(OSIS_ACTIVE);
         String accessKey = kvMap.get(OSIS_ACCESS_KEY);
 
-        validateOsisTenantId(tenantId);
 
         List<String> uids = rgwAdmin.listUser().stream()
                 .filter(uid -> uid.contains(DOLLAR)).collect(Collectors.toList());
@@ -209,12 +210,12 @@ public class CephOsisService implements OsisService {
 
     private List<OsisUser> filterOsisUsers(List<OsisUser> osisUsers, String displayName, String cdTenantId, String cdUserId, String activeStr, String accessKey, String normalizedCdTenantId) {
         osisUsers = osisUsers.stream().filter(osisUser ->
-                (StringUtils.isBlank(accessKey) || osisUser.getOsisS3Credentials().stream().anyMatch(c -> c.getAccessKey().equals(accessKey)))
-                        && (StringUtils.isBlank(displayName) || displayName.equals(osisUser.getUsername()))
-                        && (StringUtils.isBlank(activeStr) || osisUser.getActive() == Boolean.parseBoolean(activeStr))
-                        && (StringUtils.isBlank(normalizedCdTenantId) || normalizedCdTenantId.equals(CephUtil.normalize(osisUser.getCdTenantId())))
-                        && (StringUtils.isBlank(cdTenantId) || cdTenantId.equals(osisUser.getCdTenantId()))
-                        && (StringUtils.isBlank(cdUserId) || cdUserId.equals(osisUser.getCdUserId())))
+                        (StringUtils.isBlank(accessKey) || osisUser.getOsisS3Credentials().stream().anyMatch(c -> c.getAccessKey().equals(accessKey)))
+                                && (StringUtils.isBlank(displayName) || displayName.equals(osisUser.getUsername()))
+                                && (StringUtils.isBlank(activeStr) || osisUser.getActive() == Boolean.parseBoolean(activeStr))
+                                && (StringUtils.isBlank(normalizedCdTenantId) || normalizedCdTenantId.equals(CephUtil.normalize(osisUser.getCdTenantId())))
+                                && (StringUtils.isBlank(cdTenantId) || cdTenantId.equals(osisUser.getCdTenantId()))
+                                && (StringUtils.isBlank(cdUserId) || cdUserId.equals(osisUser.getCdUserId())))
                 .collect(Collectors.toList());
         return osisUsers;
     }
@@ -322,7 +323,6 @@ public class CephOsisService implements OsisService {
 
     @Override
     public OsisUser getUser(String tenantId, String userId) {
-        validateOsisTenantId(tenantId);
 
         Optional<User> user = this.rgwAdmin.getUserInfo(generateCephUid(toCephTenantId(tenantId), userId));
         if (!user.isPresent()) {
@@ -335,13 +335,22 @@ public class CephOsisService implements OsisService {
 
     @Override
     public boolean headTenant(String tenantId) {
-
-        return this.getTenant(tenantId) != null;
+        try {
+            return this.getTenant(tenantId) != null;
+        } catch (Exception e) {
+            logger.info("No tenant found with tenantId={}", tenantId);
+            return false;
+        }
     }
 
     @Override
     public boolean headUser(String tenantId, String userId) {
-        return this.getUser(tenantId, userId) != null;
+        try {
+            return this.getUser(tenantId, userId) != null;
+        } catch (Exception e) {
+            logger.info("No user found with tenantId={} and userId={}", tenantId, userId);
+            return false;
+        }
     }
 
     @Override
@@ -356,7 +365,6 @@ public class CephOsisService implements OsisService {
 
     @Override
     public OsisUser updateUser(String tenantId, String userId, OsisUser osisUser) {
-        validateOsisTenantId(tenantId);
         Map<String, String> parameters = new HashMap<>();
         parameters.put(CEPH_PARAM_SUSPENDED, String.valueOf(!osisUser.getActive()));
         return ModelConverter.toOsisUser(rgwAdmin.modifyUser(generateCephUid(toCephTenantId(tenantId), userId), parameters));
