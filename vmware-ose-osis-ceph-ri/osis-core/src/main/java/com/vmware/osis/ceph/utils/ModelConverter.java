@@ -188,6 +188,10 @@ public final class ModelConverter {
         return CephUtil.generateCephUid(cephTenantId, cephUserId);
     }
 
+    private static String toOsisUserId(String cephUid) {
+        return CephUtil.extractCephUserId(cephUid);
+    }
+
     static class DisplayNameRecordGenerator {
         List<String> attributes = new ArrayList<>();
 
@@ -251,6 +255,6 @@ public final class ModelConverter {
     public static OsisBucketMeta toOsisBucketMeta(BucketInfo bi) {
         return new OsisBucketMeta()
                 .name(bi.getBucket())
-                .userId(bi.getOwner());
+                .userId(toOsisUserId(bi.getOwner()));
     }
 }

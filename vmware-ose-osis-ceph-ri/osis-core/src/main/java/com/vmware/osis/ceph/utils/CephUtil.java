@@ -47,6 +47,10 @@ public final class CephUtil {
         return tenantId + DOLLAR + userId;
     }
 
+    public static String extractCephUserId(String cephUid) {
+        return cephUid.substring(cephUid.indexOf(DOLLAR) + 1);
+    }
+
     public static String normalize(String str) {
         return str == null ? null : str.replace("-", "");
     }
