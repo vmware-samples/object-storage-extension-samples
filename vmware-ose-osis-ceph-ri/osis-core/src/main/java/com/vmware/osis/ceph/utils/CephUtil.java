@@ -56,12 +56,6 @@ public final class CephUtil {
     }
 
 
-    public static void validateOsisTenantId(String tenantId) {
-        if (StringUtils.isNotBlank(tenantId) && !tenantId.contains(DOUBLE_UNDER_SCORE)) {
-            throw new BadRequestException(String.format("Invalid OSIS tenant ID %s", tenantId));
-        }
-    }
-
     public static Map<String, String> parseFilter(String filter) {
         if (StringUtils.isBlank(filter)) {
             return Collections.emptyMap();

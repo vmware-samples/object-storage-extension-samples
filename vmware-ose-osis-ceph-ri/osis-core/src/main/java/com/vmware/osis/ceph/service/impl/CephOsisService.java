@@ -144,10 +144,9 @@ public class CephOsisService implements OsisService {
             return paginate(offset, limit, new PageOfUsers(), Collections.emptyList());
         }
 
-        String normalizedCdTenantId = StringUtils.isNoneBlank(tenantId) ? extractCdTenantId(tenantId) : null;
         List<OsisUser> osisUsers = uids.stream().map(tenantUid -> rgwAdmin.getUserInfo(tenantUid))
                 .filter(Optional::isPresent).map(u -> ModelConverter.toOsisUser(u.get())).collect(Collectors.toList());
-        osisUsers = filterOsisUsers(osisUsers, displayName, cdTenantId, cdUserId, activeStr, null, normalizedCdTenantId);
+        osisUsers = filterOsisUsers(osisUsers, displayName, cdTenantId, cdUserId, activeStr, null);
 
         return paginate(offset, limit, new PageOfUsers(), osisUsers);
     }
@@ -197,23 +196,21 @@ public class CephOsisService implements OsisService {
             return paginate(offset, limit, new PageOfS3Credentials(), Collections.emptyList());
         }
 
-        String normalizedCdTenantId = StringUtils.isNoneBlank(tenantId) ? extractCdTenantId(tenantId) : null;
         List<OsisUser> osisUsers = uids.stream().map(tenantUid -> rgwAdmin.getUserInfo(tenantUid))
                 .filter(Optional::isPresent)
                 .map(u -> ModelConverter.toOsisUser(u.get())).collect(Collectors.toList());
-        osisUsers = filterOsisUsers(osisUsers, null, cdTenantId, cdUserId, activeStr, accessKey, normalizedCdTenantId);
+        osisUsers = filterOsisUsers(osisUsers, null, cdTenantId, cdUserId, activeStr, accessKey);
 
         List<OsisS3Credential> s3Credentials = osisUsers.stream().flatMap(osisUser ->
                 osisUser.getOsisS3Credentials().stream().filter(c -> StringUtils.isBlank(accessKey) || c.getAccessKey().equals(accessKey))).collect(Collectors.toList());
         return paginate(offset, limit, new PageOfS3Credentials(), s3Credentials);
     }
 
-    private List<OsisUser> filterOsisUsers(List<OsisUser> osisUsers, String displayName, String cdTenantId, String cdUserId, String activeStr, String accessKey, String normalizedCdTenantId) {
+    private List<OsisUser> filterOsisUsers(List<OsisUser> osisUsers, String displayName, String cdTenantId, String cdUserId, String activeStr, String accessKey) {
         osisUsers = osisUsers.stream().filter(osisUser ->
                         (StringUtils.isBlank(accessKey) || osisUser.getOsisS3Credentials().stream().anyMatch(c -> c.getAccessKey().equals(accessKey)))
                                 && (StringUtils.isBlank(displayName) || displayName.equals(osisUser.getUsername()))
                                 && (StringUtils.isBlank(activeStr) || osisUser.getActive() == Boolean.parseBoolean(activeStr))
-                                && (StringUtils.isBlank(normalizedCdTenantId) || normalizedCdTenantId.equals(CephUtil.normalize(osisUser.getCdTenantId())))
                                 && (StringUtils.isBlank(cdTenantId) || cdTenantId.equals(osisUser.getCdTenantId()))
                                 && (StringUtils.isBlank(cdUserId) || cdUserId.equals(osisUser.getCdUserId())))
                 .collect(Collectors.toList());
