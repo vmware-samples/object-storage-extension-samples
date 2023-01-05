@@ -335,8 +335,7 @@ public class CephOsisService implements OsisService {
         try {
             return this.getTenant(tenantId) != null;
         } catch (Exception e) {
-            logger.info("No tenant found with tenantId={}", tenantId);
-            return false;
+            throw new NotFoundException(String.format("No tenant found with tenantId=%s", tenantId));
         }
     }
 
@@ -345,8 +344,7 @@ public class CephOsisService implements OsisService {
         try {
             return this.getUser(tenantId, userId) != null;
         } catch (Exception e) {
-            logger.info("No user found with tenantId={} and userId={}", tenantId, userId);
-            return false;
+            throw new NotFoundException(String.format("No user found with tenantId=%s and userId=%s", tenantId, userId));
         }
     }
 
