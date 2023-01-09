@@ -108,7 +108,7 @@ public class CephOsisService implements OsisService {
             throw new BadRequestException(String.format("The tenant %s does not exist.", osisUser.getTenantId()));
         }
 
-        if (headUser(osisUser.getTenantId(), osisUser.getUserId())) {
+        if (hasUser(osisUser.getTenantId(), osisUser.getUserId())) {
             return getUser(osisUser.getTenantId(), osisUser.getUserId());
         }
 
@@ -278,7 +278,7 @@ public class CephOsisService implements OsisService {
     @Override
     public void deleteUser(String tenantId, String userId, Boolean purgeData) {
         try {
-            if (!headUser(tenantId, userId)) {
+            if (!hasUser(tenantId, userId)) {
                 return;
             }
         } catch (Exception e) {
@@ -341,9 +341,9 @@ public class CephOsisService implements OsisService {
 
     @Override
     public boolean headUser(String tenantId, String userId) {
-        try {
-            return this.getUser(tenantId, userId) != null;
-        } catch (Exception e) {
+        if (hasUser(tenantId, userId)) {
+            return true;
+        } else {
             throw new NotFoundException(String.format("No user found with tenantId=%s and userId=%s", tenantId, userId));
         }
     }
@@ -420,5 +420,14 @@ public class CephOsisService implements OsisService {
             bi = rgwAdmin.listBucketInfo();
         }
         return ModelConverter.toOsisUsage(bi);
+    }
+
+    private boolean hasUser(String tenantId, String userId) {
+        try {
+            return this.getUser(tenantId, userId) != null;
+        } catch (Exception e) {
+            logger.info("No user found with tenantId={} and userId={}", tenantId, userId);
+            return false;
+        }
     }
 }
