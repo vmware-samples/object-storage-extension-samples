@@ -97,7 +97,7 @@ public class OsisUser {
   /**
    * user id
    * @return userId
-   */
+  */
   @ApiModelProperty(example = "rachelw", required = true, value = "user id")
   public String getUserId() {
     return userId;
