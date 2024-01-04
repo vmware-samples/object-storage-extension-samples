@@ -7,6 +7,7 @@ package com.vmware.osis.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.vmware.osis.validation.Update;
 import io.swagger.annotations.ApiModelProperty;
@@ -20,6 +21,9 @@ public class OsisUser {
   private String userId;
 
   private String canonicalUserId;
+
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  private String userArn;
 
   private String tenantId;
 
@@ -93,7 +97,7 @@ public class OsisUser {
   /**
    * user id
    * @return userId
-  */
+   */
   @ApiModelProperty(example = "rachelw", required = true, value = "user id")
   public String getUserId() {
     return userId;
@@ -119,6 +123,24 @@ public class OsisUser {
 
   public void setCanonicalUserId(String canonicalUserId) {
     this.canonicalUserId = canonicalUserId;
+  }
+
+  public OsisUser userArn(String userArn) {
+    this.userArn = userArn;
+    return this;
+  }
+
+  /**
+   * user arn
+   * @return userArn
+  */
+  @ApiModelProperty(example = "arn:aws:iam::account:user/user-name-with-path", value = "user arn")
+  public String getUserArn() {
+    return userArn;
+  }
+
+  public void setUserArn(String userArn) {
+    this.userArn = userArn;
   }
 
   public OsisUser tenantId(String tenantId) {
