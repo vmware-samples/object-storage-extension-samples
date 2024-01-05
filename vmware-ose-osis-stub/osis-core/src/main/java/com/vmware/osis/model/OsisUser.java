@@ -21,6 +21,8 @@ public class OsisUser {
 
   private String canonicalUserId;
 
+  private String userArn;
+
   private String tenantId;
 
   @NotNull(groups = {Update.class})
@@ -119,6 +121,24 @@ public class OsisUser {
 
   public void setCanonicalUserId(String canonicalUserId) {
     this.canonicalUserId = canonicalUserId;
+  }
+
+  public OsisUser userArn(String userArn) {
+    this.userArn = userArn;
+    return this;
+  }
+
+  /**
+   * user arn
+   * @return userArn
+   */
+  @ApiModelProperty(example = "arn:aws:iam::account:user/user-name-with-path", value = "user arn")
+  public String getUserArn() {
+    return userArn;
+  }
+
+  public void setUserArn(String userArn) {
+    this.userArn = userArn;
   }
 
   public OsisUser tenantId(String tenantId) {
