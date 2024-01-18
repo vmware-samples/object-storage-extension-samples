@@ -81,9 +81,7 @@
         "x-amz-object-lock-legal-hold"
       ]
     },
-    "get_bucket_lifecycle_configuration": {
-      "all": true
-    },
+    "get_bucket_lifecycle_configuration": {},
     "put_bucket_lifecycle_configuration": {
       "all": true
     },
