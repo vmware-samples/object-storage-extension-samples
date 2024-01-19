@@ -82,15 +82,33 @@
       ]
     },
     "get_bucket_lifecycle_configuration": {},
-    "put_bucket_lifecycle_configuration": {},
-    "delete_bucket_lifecycle_configuration": {},
-    "delete_bucket_tagging": {},
-    "get_bucket_tagging": {},
-    "put_bucket_tagging": {},
-    "get_bucket_versioning": {},
-    "get_bucket_website": {},
-    "put_bucket_website": {},
-    "delete_bucket_website": {},
+    "put_bucket_lifecycle_configuration": {
+      "all": true
+    },
+    "delete_bucket_lifecycle_configuration": {
+      "all": true
+    },
+    "delete_bucket_tagging": {
+      "all": true
+    },
+    "get_bucket_tagging": {
+      "all": true
+    },
+    "put_bucket_tagging": {
+      "all": true
+    },
+    "get_bucket_versioning": {
+      "all": true
+    },
+    "get_bucket_website": {
+      "all": true
+    },
+    "put_bucket_website": {
+      "all": true
+    },
+    "delete_bucket_website": {
+      "all": true
+    },
     "get_object": {
       "by_params": [
         "partNumber",
@@ -129,24 +147,50 @@
         "x-amz-request-payer"
       ]
     },
-    "get_object_lock_configuration": {},
+    "get_object_lock_configuration": {
+      "all": true
+    },
     "get_object_retention": {
       "by_headers": [
         "x-amz-request-payer"
       ]
     },
-    "get_object_tagging": {},
-    "put_object_tagging": {},
-    "delete_object_tagging": {},
-    "head_bucket": {},
-    "head_object": {},
-    "list_multipart_uploads": {},
-    "list_objects": {},
-    "list_objectsV2": {},
-    "list_object_versions": {},
-    "list_parts": {},
-    "get_bucket_accelerate_configuration": {},
-    "put_bucket_accelerate_configuration": {},
+    "get_object_tagging": {
+      "all": true
+    },
+    "put_object_tagging": {
+      "all": true
+    },
+    "delete_object_tagging": {
+      "all": true
+    },
+    "head_bucket": {
+      "all": true
+    },
+    "head_object": {
+      "all": true
+    },
+    "list_multipart_uploads": {
+      "all": true
+    },
+    "list_objects": {
+      "all": true
+    },
+    "list_objectsV2": {
+      "all": true
+    },
+    "list_object_versions": {
+      "all": true
+    },
+    "list_parts": {
+      "all": true
+    },
+    "get_bucket_accelerate_configuration": {
+      "all": true
+    },
+    "put_bucket_accelerate_configuration": {
+      "all": true
+    },
     "put_bucket_acl": {
       "by_headers": [
         "x-amz-acl",
@@ -163,7 +207,9 @@
         "uri"
       ]
     },
-    "put_bucket_notification": {},
+    "put_bucket_notification": {
+      "all": true
+    },
     "put_bucket_versioning": {
       "by_headers": [
         "Content-MD5",
@@ -237,44 +283,122 @@
         "Content-MD5"
       ]
     },
-    "upload_part": {},
-    "get_bucket_lifecycle": {},
-    "put_bucket_lifecycle": {},
-    "delete_bucket_lifecycle": {},
-    "get_bucket_encryption": {},
-    "put_bucket_encryption": {},
-    "delete_bucket_encryption": {},
-    "get_bucket_cors": {},
-    "put_bucket_cors": {},
-    "delete_bucket_cors": {},
-    "get_bucket_logging": {},
-    "put_bucket_logging": {},
-    "get_bucket_request_payment": {},
-    "put_bucket_request_payment": {},
-    "list_bucket_metrics_configuration": {},
-    "get_bucket_metrics_configuration": {},
-    "put_bucket_metrics_configuration": {},
-    "delete_bucket_metrics_configuration": {},
-    "get_bucket_replication": {},
-    "put_bucket_replication": {},
-    "delete_bucket_replication": {},
-    "get_bucket_accelerate": {},
-    "put_bucket_accelerate": {},
-    "list_bucket_inventory_configuration": {},
-    "get_bucket_inventory_configuration": {},
-    "put_bucket_inventory_configuration": {},
-    "delete_bucket_inventory_configuration": {},
-    "list_bucket_analytics_configuration": {},
-    "get_bucket_analytics_configuration": {},
-    "put_bucket_analytics_configuration": {},
-    "delete_bucket_analytics_configuration": {},
-    "get_public_access_block": {},
-    "put_public_access_block": {},
-    "delete_public_access_block": {},
-    "delete_objects": {},
-    "upload_part_copy": {},
-    "get_object_torrent": {},
-    "restore_object": {},
-    "select_object_content": {}
+    "upload_part": {
+      "all": true
+    },
+    "get_bucket_lifecycle": {
+      "all": true
+    },
+    "put_bucket_lifecycle": {
+      "all": true
+    },
+    "delete_bucket_lifecycle": {
+      "all": true
+    },
+    "get_bucket_encryption": {
+      "all": true
+    },
+    "put_bucket_encryption": {
+      "all": true
+    },
+    "delete_bucket_encryption": {
+      "all": true
+    },
+    "get_bucket_cors": {
+      "all": true
+    },
+    "put_bucket_cors": {
+      "all": true
+    },
+    "delete_bucket_cors": {
+      "all": true
+    },
+    "get_bucket_logging": {
+      "all": true
+    },
+    "put_bucket_logging": {
+      "all": true
+    },
+    "get_bucket_request_payment": {
+      "all": true
+    },
+    "put_bucket_request_payment": {
+      "all": true
+    },
+    "list_bucket_metrics_configuration": {
+      "all": true
+    },
+    "get_bucket_metrics_configuration": {
+      "all": true
+    },
+    "put_bucket_metrics_configuration": {
+      "all": true
+    },
+    "delete_bucket_metrics_configuration": {
+      "all": true
+    },
+    "get_bucket_replication": {
+      "all": true
+    },
+    "put_bucket_replication": {
+      "all": true
+    },
+    "delete_bucket_replication": {
+      "all": true
+    },
+    "get_bucket_accelerate": {
+      "all": true
+    },
+    "put_bucket_accelerate": {
+      "all": true
+    },
+    "list_bucket_inventory_configuration": {
+      "all": true
+    },
+    "get_bucket_inventory_configuration": {
+      "all": true
+    },
+    "put_bucket_inventory_configuration": {
+      "all": true
+    },
+    "delete_bucket_inventory_configuration": {
+      "all": true
+    },
+    "list_bucket_analytics_configuration": {
+      "all": true
+    },
+    "get_bucket_analytics_configuration": {
+      "all": true
+    },
+    "put_bucket_analytics_configuration": {
+      "all": true
+    },
+    "delete_bucket_analytics_configuration": {
+      "all": true
+    },
+    "get_public_access_block": {
+      "all": true
+    },
+    "put_public_access_block": {
+      "all": true
+    },
+    "delete_public_access_block": {
+      "all": true
+    },
+    "delete_objects": {
+      "all": true
+    },
+    "upload_part_copy": {
+      "all": true
+    },
+    "get_object_torrent": {
+      "all": true
+    },
+    "restore_object": {
+      "all": true
+    },
+    "select_object_content": {
+      "all": true
+    }
   }
 }
