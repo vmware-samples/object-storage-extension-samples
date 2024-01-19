@@ -77,6 +77,9 @@ public class OsisS3Capabilities {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class OsisS3CapabilitiesExclusions {
 
+        public static final String JSON_PROPERTY_ALL = "all";
+        private boolean all = false;
+
         public static final String JSON_PROPERTY_BY_PARAMS = "by_params";
         private List<String> byParams = null;
 
@@ -85,6 +88,30 @@ public class OsisS3Capabilities {
 
         public static final String JSON_PROPERTY_BY_PAYLOAD = "by_payload";
         private List<String> byPayload = null;
+
+        public OsisS3CapabilitiesExclusions all(boolean all) {
+
+            this.all = all;
+            return this;
+        }
+
+        /**
+         * Get all
+         *
+         * @return all
+         **/
+        @ApiModelProperty(value = "")
+        @JsonProperty(JSON_PROPERTY_ALL)
+        @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+        public boolean getAll() {
+            return all;
+        }
+
+
+        public void setAll(boolean all) {
+            this.all = all;
+        }
 
 
         public OsisS3CapabilitiesExclusions byParams(List<String> byParams) {
@@ -194,14 +221,15 @@ public class OsisS3Capabilities {
                 return false;
             }
             OsisS3CapabilitiesExclusions osisS3CapabilitiesExclusions = (OsisS3CapabilitiesExclusions) o;
-            return Objects.equals(this.byParams, osisS3CapabilitiesExclusions.byParams) &&
+            return Objects.equals(this.all, osisS3CapabilitiesExclusions.all) &&
+                    Objects.equals(this.byParams, osisS3CapabilitiesExclusions.byParams) &&
                     Objects.equals(this.byHeaders, osisS3CapabilitiesExclusions.byHeaders) &&
                     Objects.equals(this.byPayload, osisS3CapabilitiesExclusions.byPayload);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(byParams, byHeaders, byPayload);
+            return Objects.hash(all, byParams, byHeaders, byPayload);
         }
 
 
@@ -209,6 +237,7 @@ public class OsisS3Capabilities {
         public String toString() {
             StringBuilder sb = new StringBuilder();
             sb.append("class OsisS3CapabilitiesExclusions {\n");
+            sb.append("    all: ").append(toIndentedString(all)).append("\n");
             sb.append("    byParams: ").append(toIndentedString(byParams)).append("\n");
             sb.append("    byHeader: ").append(toIndentedString(byHeaders)).append("\n");
             sb.append("    byPayload: ").append(toIndentedString(byPayload)).append("\n");
