@@ -137,7 +137,8 @@ public class CephOsisService implements OsisService {
 
 
         List<String> uids = rgwAdmin.listUser().stream()
-                .filter(uid -> uid.contains(DOLLAR)).collect(Collectors.toList());
+                .filter(CephOsisService::isUser)
+                .collect(Collectors.toList());
         uids = filterCephUids(uids, canonicalUserId, tenantId, userId);
 
         if (uids.isEmpty()) {
@@ -190,7 +191,7 @@ public class CephOsisService implements OsisService {
 
 
         List<String> uids = rgwAdmin.listUser().stream()
-                .filter(uid -> uid.contains(DOLLAR)).collect(Collectors.toList());
+                .filter(CephOsisService::isUser).collect(Collectors.toList());
         uids = filterCephUids(uids, null, tenantId, userId);
         if (uids.isEmpty()) {
             return paginate(offset, limit, new PageOfS3Credentials(), Collections.emptyList());
@@ -390,7 +391,7 @@ public class CephOsisService implements OsisService {
     public PageOfOsisBucketMeta getBucketList(String tenantId, long offset, long limit) {
         List<OsisBucketMeta> buckets = new ArrayList<>();
         rgwAdmin.listUser().stream()
-                .filter(uid -> uid.startsWith(toCephTenantId(tenantId) + DOLLAR))
+                .filter(uid -> isUserOfTenant(uid, tenantId))
                 .forEach(uid -> buckets.addAll(rgwAdmin.listBucketInfo(uid).stream().map(ModelConverter::toOsisBucketMeta)
                         .collect(Collectors.toList())));
 
@@ -405,7 +406,8 @@ public class CephOsisService implements OsisService {
         } else if (tenantId.isPresent()) {
 
             List<String> uidsBelongToTenant = rgwAdmin.listUser().stream()
-                    .filter(uid -> uid.startsWith(toCephTenantId(tenantId.get()) + DOLLAR)).collect(Collectors.toList());
+                    .filter(uid -> isUserOfTenant(uid, tenantId.get()))
+                    .collect(Collectors.toList());
             return uidsBelongToTenant.stream().map(uid -> ModelConverter.toOsisUsage(rgwAdmin.listBucketInfo(uid)))
                     .reduce(new OsisUsage(), (u1, u2) -> {
                         OsisUsage usage = new OsisUsage();
@@ -420,6 +422,16 @@ public class CephOsisService implements OsisService {
             bi = rgwAdmin.listBucketInfo();
         }
         return ModelConverter.toOsisUsage(bi);
+    }
+
+    private static boolean isUserOfTenant(String cephUid, String tenantId) {
+        return cephUid.startsWith(toCephTenantId(tenantId) + DOLLAR) && isUser(cephUid);
+    }
+
+    // In this RI project, CEPH User with UID==<tenantId>$<tenantId> represents VCD tenant
+    private static boolean isUser(String uid) {
+        String[] segments = StringUtils.split(uid, DOLLAR);
+        return segments.length == 2 && !StringUtils.equals(segments[0], segments[1]);
     }
 
     private boolean hasUser(String tenantId, String userId) {
