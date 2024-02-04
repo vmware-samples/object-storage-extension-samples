@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 # flake8: noqa
 
 # import apis into api package
@@ -16,3 +14,4 @@ from openapi_client.api.tenant_api import TenantApi
 from openapi_client.api.token_api import TokenApi
 from openapi_client.api.usage_api import UsageApi
 from openapi_client.api.user_api import UserApi
+
