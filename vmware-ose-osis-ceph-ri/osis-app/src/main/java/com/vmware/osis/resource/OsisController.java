@@ -52,6 +52,7 @@ public class OsisController {
     })
     @PostMapping(value = "/api/v1/tenants/{tenantId}/users/{userId}/s3credentials",
             produces = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
     public OsisS3Credential createCredential(
             @ApiParam(value = "The ID of the tenant which the user belongs to", required = true)
             @PathVariable("tenantId") String tenantId,
@@ -80,6 +81,7 @@ public class OsisController {
     @PostMapping(value = "/api/v1/tenants",
             produces = "application/json",
             consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
     public OsisTenant createTenant(
             @ApiParam(value = "Tenant to create in the platform", required = true)
             @Valid @RequestBody OsisTenant osisTenant) {
@@ -107,6 +109,7 @@ public class OsisController {
     @PostMapping(value = "/api/v1/tenants/{tenantId}/users",
             produces = "application/json",
             consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
     public OsisUser createUser(
             @ApiParam(value = "The ID of the tenant which the created user belongs to", required = true)
             @PathVariable("tenantId") String tenantId,
@@ -173,7 +176,7 @@ public class OsisController {
             @PathVariable("tenantId") String tenantId,
             @ApiParam(value = "Purge data when the tenant is deleted", defaultValue = "true")
             @Valid @RequestParam(value = "purge_data", required = false, defaultValue = "true")
-                    Boolean purgeData) {
+            Boolean purgeData) {
         osisService.deleteTenant(tenantId, purgeData);
     }
 
@@ -203,7 +206,7 @@ public class OsisController {
             @PathVariable("userId") String userId,
             @ApiParam(value = "Purge data when the user is deleted", defaultValue = "true")
             @Valid @RequestParam(value = "purge_data", required = false, defaultValue = "true")
-                    Boolean purgeData) {
+            Boolean purgeData) {
         osisService.deleteUser(tenantId, userId, purgeData);
     }
 
