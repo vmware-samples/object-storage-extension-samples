@@ -9,3 +9,4 @@ urllib3>=1.15.1
 aws-requests-auth>=0.4.3
 requests>=2.24.0
 terminal-banner>=0.2.0
+pydantic==2.6
