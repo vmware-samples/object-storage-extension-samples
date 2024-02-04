@@ -20,20 +20,20 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, StrictStr
 from pydantic import Field
-from openapi_client.models.osis_s3_capabilities_exclusions_value import OsisS3CapabilitiesExclusionsValue
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-class OsisS3Capabilities(BaseModel):
+class GetAnonymousUser200Response(BaseModel):
     """
-    OsisS3Capabilities
+    GetAnonymousUser200Response
     """ # noqa: E501
-    exclusions: Optional[Dict[str, OsisS3CapabilitiesExclusionsValue]] = Field(default=None, description="The S3 API code which is not supported by the storage platform. The API code complies with https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html.")
-    __properties: ClassVar[List[str]] = ["exclusions"]
+    id: Optional[StrictStr] = Field(default=None, description="The anonymous user ID.")
+    name: Optional[StrictStr] = Field(default=None, description="The anonymous user name.")
+    __properties: ClassVar[List[str]] = ["id", "name"]
 
     model_config = {
         "populate_by_name": True,
@@ -53,7 +53,7 @@ class OsisS3Capabilities(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of OsisS3Capabilities from a JSON string"""
+        """Create an instance of GetAnonymousUser200Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,18 +72,11 @@ class OsisS3Capabilities(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each value in exclusions (dict)
-        _field_dict = {}
-        if self.exclusions:
-            for _key in self.exclusions:
-                if self.exclusions[_key]:
-                    _field_dict[_key] = self.exclusions[_key].to_dict()
-            _dict['exclusions'] = _field_dict
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of OsisS3Capabilities from a dict"""
+        """Create an instance of GetAnonymousUser200Response from a dict"""
         if obj is None:
             return None
 
@@ -91,12 +84,8 @@ class OsisS3Capabilities(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "exclusions": dict(
-                (_k, OsisS3CapabilitiesExclusionsValue.from_dict(_v))
-                for _k, _v in obj.get("exclusions").items()
-            )
-            if obj.get("exclusions") is not None
-            else None
+            "id": obj.get("id"),
+            "name": obj.get("name")
         })
         return _obj
 

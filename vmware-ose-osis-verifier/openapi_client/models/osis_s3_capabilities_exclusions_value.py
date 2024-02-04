@@ -20,20 +20,22 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, StrictBool, StrictStr
 from pydantic import Field
-from openapi_client.models.osis_s3_capabilities_exclusions_value import OsisS3CapabilitiesExclusionsValue
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-class OsisS3Capabilities(BaseModel):
+class OsisS3CapabilitiesExclusionsValue(BaseModel):
     """
-    OsisS3Capabilities
+    OsisS3CapabilitiesExclusionsValue
     """ # noqa: E501
-    exclusions: Optional[Dict[str, OsisS3CapabilitiesExclusionsValue]] = Field(default=None, description="The S3 API code which is not supported by the storage platform. The API code complies with https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html.")
-    __properties: ClassVar[List[str]] = ["exclusions"]
+    all: Optional[StrictBool] = Field(default=False, description="Indicates whether this API is completely not supported. True means that the api is completely not supported. False means that a) the api is partial supported if any of by_params, by_headers and by_payload are defined, or b) the api is completely not supported if none of by_params, by_headers and by_payload are defined. ")
+    by_params: Optional[List[StrictStr]] = Field(default=None, description="The URL parameters not supported for specific S3 API.")
+    by_headers: Optional[List[StrictStr]] = Field(default=None, description="The HTTP headers not supported for specific S3 API.")
+    by_payload: Optional[List[StrictStr]] = Field(default=None, description="The request properties not supported for specific S3 API.")
+    __properties: ClassVar[List[str]] = ["all", "by_params", "by_headers", "by_payload"]
 
     model_config = {
         "populate_by_name": True,
@@ -53,7 +55,7 @@ class OsisS3Capabilities(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of OsisS3Capabilities from a JSON string"""
+        """Create an instance of OsisS3CapabilitiesExclusionsValue from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,18 +74,11 @@ class OsisS3Capabilities(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each value in exclusions (dict)
-        _field_dict = {}
-        if self.exclusions:
-            for _key in self.exclusions:
-                if self.exclusions[_key]:
-                    _field_dict[_key] = self.exclusions[_key].to_dict()
-            _dict['exclusions'] = _field_dict
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of OsisS3Capabilities from a dict"""
+        """Create an instance of OsisS3CapabilitiesExclusionsValue from a dict"""
         if obj is None:
             return None
 
@@ -91,12 +86,10 @@ class OsisS3Capabilities(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "exclusions": dict(
-                (_k, OsisS3CapabilitiesExclusionsValue.from_dict(_v))
-                for _k, _v in obj.get("exclusions").items()
-            )
-            if obj.get("exclusions") is not None
-            else None
+            "all": obj.get("all") if obj.get("all") is not None else False,
+            "by_params": obj.get("by_params"),
+            "by_headers": obj.get("by_headers"),
+            "by_payload": obj.get("by_payload")
         })
         return _obj
 
