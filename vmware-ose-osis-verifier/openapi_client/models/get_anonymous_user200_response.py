@@ -18,19 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictInt
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PageInfo(BaseModel):
+class GetAnonymousUser200Response(BaseModel):
     """
-    PageInfo
+    GetAnonymousUser200Response
     """ # noqa: E501
-    limit: StrictInt = Field(description="The maximum number of the items in each page.")
-    offset: StrictInt = Field(description="The offset of the current page in the whole set of items.")
-    total: StrictInt = Field(description="The total number of the items.")
-    __properties: ClassVar[List[str]] = ["limit", "offset", "total"]
+    id: Optional[StrictStr] = Field(default=None, description="The anonymous user ID.")
+    name: Optional[StrictStr] = Field(default=None, description="The anonymous user name.")
+    __properties: ClassVar[List[str]] = ["id", "name"]
 
     model_config = {
         "populate_by_name": True,
@@ -50,7 +49,7 @@ class PageInfo(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PageInfo from a JSON string"""
+        """Create an instance of GetAnonymousUser200Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,7 +74,7 @@ class PageInfo(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PageInfo from a dict"""
+        """Create an instance of GetAnonymousUser200Response from a dict"""
         if obj is None:
             return None
 
@@ -83,9 +82,8 @@ class PageInfo(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "limit": obj.get("limit"),
-            "offset": obj.get("offset"),
-            "total": obj.get("total")
+            "id": obj.get("id"),
+            "name": obj.get("name")
         })
         return _obj
 

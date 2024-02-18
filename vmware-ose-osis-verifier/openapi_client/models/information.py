@@ -18,14 +18,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictStr, field_validator
-from pydantic import Field
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class Information(BaseModel):
     """
@@ -47,7 +43,7 @@ class Information(BaseModel):
     @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('NORMAL', 'WARNING', 'ERROR', 'UNKNOWN'):
+        if value not in set(['NORMAL', 'WARNING', 'ERROR', 'UNKNOWN']):
             raise ValueError("must be one of enum values ('NORMAL', 'WARNING', 'ERROR', 'UNKNOWN')")
         return value
 
@@ -58,7 +54,7 @@ class Information(BaseModel):
             return value
 
         for i in value:
-            if i not in ('Basic', 'Bearer'):
+            if i not in set(['Basic', 'Bearer']):
                 raise ValueError("each list item must be one of ('Basic', 'Bearer')")
         return value
 
@@ -79,7 +75,7 @@ class Information(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of Information from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -93,16 +89,18 @@ class Information(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
+        excluded_fields: Set[str] = set([
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of Information from a dict"""
         if obj is None:
             return None

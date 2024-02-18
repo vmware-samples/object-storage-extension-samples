@@ -18,14 +18,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-
+from pydantic import BaseModel, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from pydantic import BaseModel, StrictBool, StrictStr, field_validator
-from pydantic import Field
-try:
-    from typing import Self
-except ImportError:
-    from typing_extensions import Self
+from typing import Optional, Set
+from typing_extensions import Self
 
 class OsisUser(BaseModel):
     """
@@ -49,7 +45,7 @@ class OsisUser(BaseModel):
         if value is None:
             return value
 
-        if value not in ('PROVIDER_ADMIN', 'TENANT_ADMIN', 'TENANT_USER', 'ANONYMOUS', 'UNKNOWN'):
+        if value not in set(['PROVIDER_ADMIN', 'TENANT_ADMIN', 'TENANT_USER', 'ANONYMOUS', 'UNKNOWN']):
             raise ValueError("must be one of enum values ('PROVIDER_ADMIN', 'TENANT_ADMIN', 'TENANT_USER', 'ANONYMOUS', 'UNKNOWN')")
         return value
 
@@ -70,7 +66,7 @@ class OsisUser(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Optional[Self]:
         """Create an instance of OsisUser from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -84,16 +80,18 @@ class OsisUser(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
+        excluded_fields: Set[str] = set([
+        ])
+
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-            },
+            exclude=excluded_fields,
             exclude_none=True,
         )
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Dict) -> Self:
+    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
         """Create an instance of OsisUser from a dict"""
         if obj is None:
             return None

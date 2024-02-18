@@ -18,19 +18,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictInt
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PageInfo(BaseModel):
+class OsisS3CapabilitiesExclusionsValue(BaseModel):
     """
-    PageInfo
+    OsisS3CapabilitiesExclusionsValue
     """ # noqa: E501
-    limit: StrictInt = Field(description="The maximum number of the items in each page.")
-    offset: StrictInt = Field(description="The offset of the current page in the whole set of items.")
-    total: StrictInt = Field(description="The total number of the items.")
-    __properties: ClassVar[List[str]] = ["limit", "offset", "total"]
+    all: Optional[StrictBool] = Field(default=False, description="Indicates whether this API is completely not supported. True means that the api is completely not supported. False means that a) the api is partial supported if any of by_params, by_headers and by_payload are defined, or b) the api is completely not supported if none of by_params, by_headers and by_payload are defined. ")
+    by_params: Optional[List[StrictStr]] = Field(default=None, description="The URL parameters not supported for specific S3 API.")
+    by_headers: Optional[List[StrictStr]] = Field(default=None, description="The HTTP headers not supported for specific S3 API.")
+    by_payload: Optional[List[StrictStr]] = Field(default=None, description="The request properties not supported for specific S3 API.")
+    __properties: ClassVar[List[str]] = ["all", "by_params", "by_headers", "by_payload"]
 
     model_config = {
         "populate_by_name": True,
@@ -50,7 +51,7 @@ class PageInfo(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PageInfo from a JSON string"""
+        """Create an instance of OsisS3CapabilitiesExclusionsValue from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,7 +76,7 @@ class PageInfo(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PageInfo from a dict"""
+        """Create an instance of OsisS3CapabilitiesExclusionsValue from a dict"""
         if obj is None:
             return None
 
@@ -83,9 +84,10 @@ class PageInfo(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "limit": obj.get("limit"),
-            "offset": obj.get("offset"),
-            "total": obj.get("total")
+            "all": obj.get("all") if obj.get("all") is not None else False,
+            "by_params": obj.get("by_params"),
+            "by_headers": obj.get("by_headers"),
+            "by_payload": obj.get("by_payload")
         })
         return _obj
 
