@@ -105,13 +105,4 @@ class LoginUtil:
 
 if __name__ == '__main__':
     # url, usr, pwd, vcd=True
-    url = "https://oss-vcd.eng.vmware.com/api/sessions"
-    usr = "tuc@quc"
-    pwd = "vmware"
-    login_util = LoginUtil(url=url, usr=usr, pwd=pwd)
-    login_util.get_token()
-    print(login_util.token)
-    print(login_util.user_id)
-    login_util.get_token(token_type='jwt')
-    print(login_util.auth_headers)
-    print(login_util.user_id)
+    pass

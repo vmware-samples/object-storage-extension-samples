@@ -74,7 +74,4 @@ def send_email(file_n, local_folder, ose_profile_configs=None):
 
 
 if __name__ == '__main__':
-    file_n = 's3-test@2020-07-28-11-19-06.html'
-    local_folder = '/Users/elvisy/PycharmProjects/s3-test'
-
-    send_email(file_n, local_folder)
+    pass

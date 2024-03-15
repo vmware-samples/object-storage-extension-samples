@@ -1,29 +1,20 @@
 # vcd url
-vcd_url: https://alp-vcd102.eng.vmware.com/
+vcd_url: <your_vcd_url>
 # ose url
-ose_url: https://oss-vcd.eng.vmware.com:18891
+ose_url: <your_ose_url>
 # virtual host style
 virtual_host_style: False
 # region
-region: region-1
+region: <your-vendor-region>
 
 # "TestBucket#test01_test_create_bucket#10" is related with this config.
 # LocationConstraint: Create a bucket within the Location Constraint Region
 #
 # If the case fails, need to update based on actual region.
-location_constraint: region-1
+location_constraint: <your-vendor-region>
 
-# vendor s3 endpoint
-# "vendor" info are configured to test directly against vendor s3 endpoint;
-# This is helpful to validate the vendor behaviour;
-# Command e.g:
-# 'python ose-runner.py --log_level debug --testcases TCID --vendor'
-
-#vendor_s3_endpoint: https://s3.amazonaws.com/
-#vendor_region: us-east-1
-
-vendor_s3_endpoint: https://10.139.113.221:443
-vendor_region: region-1
+vendor_s3_endpoint: <your_vendor_s3_endpoint_url>
+vendor_region: <your-vendor-region>
 
 # Two vCD organizations are needed for acl related testing.
 # With OSE solution, the vCD organization is mapping to a group in vendor. So additional users are needed for
@@ -41,22 +32,22 @@ vendor_region: region-1
 group1:
   user1:
     login_credential:
-      vcd_user: oss-auto-tu1@ossauto1
-      vcd_password: vmware
+      vcd_user: <your_username>
+      vcd_password: <your_password>
 
   user2:
     login_credential:
-      vcd_user: oss-auto-tu2@ossauto1
-      vcd_password: vmware
+      vcd_user: <your_username>
+      vcd_password: <your_password>
 group2:
   user1:
     login_credential:
-      vcd_user: oss-auto-tu1@ossauto2
-      vcd_password: vmware
+      vcd_user: <your_username>
+      vcd_password: <your_password>
 
 log_level: DEBUG
 storage:
-  region: region-1
+  region: <your-vendor-region>
   storageClass: STANDARD
 
 

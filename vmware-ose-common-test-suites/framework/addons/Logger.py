@@ -14,7 +14,7 @@ import time
 import threading
 
 
-class TestLog():
+class TestLog:
     lock = threading.Lock()
 
     def __init__(self):

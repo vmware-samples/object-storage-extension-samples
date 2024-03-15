@@ -6,12 +6,12 @@ osis:
     version: 15.2.3
     rgw:
       endpoint: http://ceph.osis.ose.vmware.com:31383/admin
-      access-key: MPG0RVCDCDDTSRJJONJK
-      secret-key: c5XMURa3Eu3KGPvHDmwTw8GQSOzDujfmNA94tlPh
+      access-key: <osis-accesskey>
+      secret-key: <osis-secretkey>
     s3:
       endpoint: http://ceph.osis.ose.vmware.com:31383
-      access-key: 094BC4MZSZMET634FXZ0
-      secret-key: Gpyohi7gTe0YriLNhURixitKoZ8IVAsCPrDDZxh6
+      access-key: <osis-accesskey>
+      secret-key: <osis-secretkey>
     console:
       endpoint: https://dashboard.ceph.osis.ose.vmware.com:30610
   api:
@@ -22,9 +22,9 @@ server:
   verbose: true
   ssl:
     key-store: classpath:osis.p12
-    key-store-password: vmware
+    key-store-password: <key store password>
     key-store-type: PKCS12
-    key-alias: osis.dev.eng.vmware.com
+    key-alias: <key alias>
 
 security:
   require-ssl: true
